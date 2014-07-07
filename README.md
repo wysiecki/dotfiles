@@ -2,7 +2,7 @@ dotfiles
 ========
 following .vim dir structure:
 
-.vim/
+.vim/<br>
 ├── backup (vim backup dir)<br>
 ├── bundle (with at least vundle)<br>
 ├── session (saved sessions)<br>
