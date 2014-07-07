@@ -64,10 +64,6 @@ Plugin 'tyok/nerdtree-ack'
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'tomtom/tcomment_vim'
 "Plugin 'kien/ctrlp.vim'
-"if has("gui_running")
-""	Plugin 'wincent/Command-T'
-""	Plugin 'Valloric/YouCompleteMe'
-"endif
 
 
 "Plugin 'fholgado/minibufexpl.vim'
