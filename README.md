@@ -3,11 +3,11 @@ dotfiles
 following .vim dir structure:
 
 .vim/
-├── backup (vim backup dir)
-├── bundle (with at least vundle)
-├── session (saved sessions)
-├── swap (swp files)
-└── tags (ctags files)
+├── backup (vim backup dir)<br>
+├── bundle (with at least vundle)<br>
+├── session (saved sessions)<br>
+├── swap (swp files)<br>
+└── tags (ctags files)<br>
 
 
 Vundle needs to be installed first:
