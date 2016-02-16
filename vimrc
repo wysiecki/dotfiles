@@ -1,278 +1,220 @@
+set ttyfast
+set lazyredraw
+set regexpengine=1
+	""""""""""""""""""""""""""""""""
+	"
+	" PACKAGE MANAGEMENT
 
-set nocompatible
+	""""""""""""""""""""""""""""""""
+	" not a vi
+	set nocompatible
+	set encoding=utf-8
+	set shell=/bin/sh
 
-" number the lines.
-set number
+	" start vundler
+	filetype off
+	set rtp+=~/.vim/bundle/vundle/
+	call vundle#rc()
 
-" show location of cursor using a horizontal line.
-"set cursorline
+" core plugins
+Bundle "gmarik/vundle"
+Bundle "sjl/gundo.vim"
+Bundle "kien/ctrlp.vim"
+Bundle "scrooloose/syntastic.git"
+Bundle "vim-scripts/tComment"
+Bundle "tpope/vim-surround"
+Bundle "mileszs/ack.vim"
+Bundle "rking/ag.vim"
+Bundle "edsono/vim-matchit"
+" Bundle "bronson/vim-trailing-whitespace"
+Bundle "tpope/vim-fugitive"
+Bundle "jiangmiao/auto-pairs"
+Bundle "xolox/vim-session"
+Bundle "xolox/vim-misc"
+Bundle "airblade/vim-gitgutter"
+Bundle "Lokaltog/vim-easymotion"
+Bundle "rhysd/clever-f.vim"
+Bundle "scrooloose/nerdtree"
+Bundle "vim-scripts/taglist.vim"
+Bundle "ervandew/supertab"
+Bundle "shawncplus/phpcomplete.vim"
+Bundle "Valloric/MatchTagAlways"
+Bundle "tobyS/vmustache"
+Bundle "tobyS/pdv"
+Bundle "vim-scripts/phpfolding.vim"
+Bundle "joonty/vdebug"
+Bundle "mattn/emmet-vim"
+Bundle "alvan/vim-php-manual"
+Bundle "altercation/vim-colors-solarized"
+Bundle "itchyny/lightline.vim"
+Bundle 'cocopon/lightline-hybrid.vim'
+Bundle "ap/vim-buftabline"
+Bundle "jonathanfilip/vim-lucius"
 
-" keep cursor in the middle of the screen while scrolling up and down.
-"set scrolloff=999
-
-" turn on syntax hightlighting.
 syntax on
-set number
+let g:lightline = {}
+let g:lightline.colorscheme = 'hybrid'
 
-"colorscheme delek
-filetype off                  " required!
-set tags=~/.vim/tags/meditel
-
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-" required!
-Plugin 'gmarik/vundle'
-Plugin 'sjl/gundo.vim'
-"Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'xolox/vim-session'
-Plugin 'xolox/vim-misc'
-"" PHPdoc Comments Ctrl + p
-Plugin 'tobyS/pdv'
-let g:pdv_template_dir = "/Users/wysiecki/.vim/bundle/pdv/templates"
-Plugin 'tobyS/vmustache'
-"Plugin 'ervandew/supertab'
-Plugin 'tpope/vim-fugitive'
-
-"Plugin 'Shougo/vimproc'
-"Plugin 'Shougo/unite.vim'
-"Plugin 'm2mdas/phpcomplete-extended'
-"autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
-
-nnoremap <leader>d :call pdv#DocumentCurrentLine()<CR>
-nnoremap <leader>f :call pdv#DocumentWithSnip()<CR>
-
-"Plugin 'spf13/PIV'
-"Plugin 'phpfolding.vim'
-Plugin 'UltiSnips'
-"Plugin 'Auto-Pairs'
-
-Plugin 'scrooloose/nerdtree'
-"Plugin 'Lokaltog/vim-easymotion'
-Plugin 'bling/vim-airline'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/syntastic'
-"Plugin 'altercation/vim-colors-solarized'
-Plugin 'isaacs/ack.vim'
-Plugin 'tyok/nerdtree-ack'
-"Plugin 'tpope/vim-fugitive'
-
-"Plugin 'Shougo/vimproc'
-"Plugin 'Shougo/unite.vim'
-Plugin 'vim-scripts/bufexplorer.zip'
-Plugin 'tomtom/tcomment_vim'
-"Plugin 'kien/ctrlp.vim'
-
-
-"Plugin 'fholgado/minibufexpl.vim'
-"Plugin 'joonty/vdebug.git'
-
-Plugin 'Valloric/YouCompleteMe'
-
-
+let g:solarized_termcolors= 256 
+let g:solarized_visibility = "low"
+let g:DisableAutoPHPFolding = 1
+let g:hardtime_default_on = 1
+colorscheme lucius
+set background=light
+" enable all the plugins
 filetype plugin indent on
-"set runtimepath+=~/.vim/ultisnips_rep
 
-set background=light 
-" light dark
-set t_Co=256
-set showmatch       " show matching brackets.
-
-let g:session_autosave = 'yes'
-let g:airline#extensions#tabline#enabled = 1
-" airline
-if !exists("g:airline_symbols")
-  let g:airline_symbols = {}
-endif
-
-""" Airline settings
-" let g:airline_powerline_fonts = 1
-let g:airline_detect_whitespace = 2
-" Add the alternate buffer name next to the current file name
-let g:airline_section_c = "%f%m %{bufname('#') != '' ? '('. expand('#:t') .')' : ''}"
-" old
-
-let g:airline_theme="powerlineish"
-let g:airline_powerline_fonts=1
-let g:airline_section_warning = airline#section#create([ "syntastic" ])
-let g:airline#extensions#branch#empty_message  =  "No SCM"
-let g:airline#extensions#whitespace#enabled    =  0
-let g:airline#extensions#syntastic#enabled     =  1
-let g:airline#extensions#tabline#enabled       =  1
-let g:airline#extensions#tabline#tab_nr_type   =  1 " tab number
-let g:airline#extensions#tabline#fnamecollapse =  1 " /a/m/model.rb
-let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
-let g:airline#extensions#tabline#fnamemod = ':t'
-set guifont=Sauce\ Code\ Powerline:h13
-let g:Powerline_symbols = 'unicode'
-set laststatus=2
-set encoding=utf-8
-set fillchars+=stl:\ ,stlnc:\
-let mapleader=','
-let g:airline_powerline_fonts = 1
-set laststatus=2
-
-set backupdir=~/.vim/backup/
-set directory=~/.vim/swap/
-
-" Show matching brackets when text indicator is over them
-set showmatch
-
-"Reselect visual block after indent/outdent"
-vnoremap < <gv
-vnoremap > >gv
+""""""""""""""""""""""""""""""""
 "
-" " Toggle NERDTree
-map <Leader>m :NERDTreeToggle<CR>
-map <Leader>r :NERDTreeFind<CR>
+" SETTINGS & KEYBINDINGS
+"
+""""""""""""""""""""""""""""""""
+" set expandtab
+set smarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set autoindent
+set ruler
+set hidden
+set ignorecase
+set smartcase
+set showmatch
+set incsearch
+set hls
+set relativenumber
+set number
+set ls=2
+set cursorline
+" set nowrap
+set wrap linebreak
+set linebreak
+set showbreak=↳\ 
+set backspace=indent,eol,start
+set shell=/bin/bash
+set completeopt -=preview
+"set textwidth=100
+set wildmenu
+set wildignore+=*.bpm,*.gif,*.png,*.jpg,*.ico,.DS_Store,.git,yii-*,assets*
+" set wildmode=longest,list,full
+set wildmode=longest:full,full
+set mouse=a
+set ttyfast
+set noshowmode
+set cmdheight=1
+" set autoread
+
+" backup/persistance settings
+set undodir=~/.vim/tmp/undo//
+set backupdir=~/.vim/tmp/backup//
+set directory=~/.vim/tmp/swap//
+set backupskip=/tmp/*,/private/tmp/*"
+set backup
+set writebackup
+set noswapfile
+set t_Co=256
+set gfn=Source\ Code\ Pro\ for\ Powerline:h14
+:imap § ->
+
+" persist (g)undo tree between sessions
+set undofile
+set history=1000
+set undolevels=1000
+
+" set <leader>
+let mapleader=","
+
+" show trailing whitespaces
+set list
+set listchars=tab:.\ ,trail:¬,nbsp:.,extends:❯,precedes:❮
+augroup ListChars2
+    au!
+    autocmd filetype go set listchars+=tab:\ \ 
+    autocmd ColorScheme * hi! link SpecialKey Normal
+augroup END
+
+" syntax highlighting
+
+" autocmd FileType * set noexpandtab
+
+" session management
+let g:session_directory = "~/.vim/session"
+let g:session_autoload = "no"
+let g:session_autosave = "yes"
+let g:session_command_aliases = 1
 let NERDTreeShowBookmarks=1
 let NERDTreeQuitOnOpen=1
-"
+let NERDTreeChDirMode=2
 
-""" Tagbar plugin settings
-map <F8> :TagbarToggle<CR>
-let g:tagbar_sort = 0
-let g:tagbar_compact = 1
-let g:tagbar_autoshowtag = 1
-let g:tagbar_width = 25
-let g:tagbar_iconchars = ['+', '-']
 
-""" Syntastic settings
-let g:syntastic_enable_highlighting = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = 'E'
-let g:syntastic_style_error_symbol = 'S'
-let g:syntastic_warning_symbol = 'W'
-let g:syntastic_style_warning_symbol = 'S'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_php_checkers = ['php']
-let g:syntastic_phpcs_disable=1
-nmap <silent> <leader>v :SyntasticCheck<cr>
+" visual reselect of just pasted
+nnoremap gp `[v`]
 
-" Auto-open tagbar only if not in diff mode and the term wide enough to also
-" fit an 80-column window (plus eight for line numbers and the fold column).
-if &columns > 118
-    if ! &diff
-        au VimEnter * nested :call tagbar#autoopen(1)
-    endif
-else
-    let g:tagbar_autoclose = 1
-    let g:tagbar_autofocus = 1
+
+" ctrlP config
+let g:ctrlp_map = "<c-p>"
+
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+nnoremap / /\v
+
+
+" clever-f prompt
+let g:clever_f_show_prompt = 1
+let g:clever_f_across_no_line = 1
+
+if executable("ag")
+  let g:ackprg = "ag --nogroup --column"
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-set noexpandtab
-set copyindent
-set preserveindent
-set softtabstop=0
-set shiftwidth=4
-set tabstop=4
+" reload ctags
+" nnoremap <leader>C :!ctags -R --exclude=.git --exclude=log --exclude=tmp *<CR><CR>
+
+" git and ack stuff
+let g:gitgutter_enabled = 1
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 
 
-
-" don't select first item, follow typing in autocomplete
-set completeopt=longest,menuone,preview
-
-set wildmenu                    		"wmnu:  enhanced ex command completion
-set wildmode=longest:full,list:full  	"wim:   helps wildmenu auto-completion
-
-set encoding=utf-8
-set relativenumber              "rnu:   show line numbers relative to the current line; <leader>u to toggle
-set number                      "nu:    show the actual line number for the current line in relativenumber
-set showmode                    "smd:   shows current vi mode in lower left
-set cursorline                  "cul:   highlights the current line
-set showcmd                     "sc:    shows typed commands
-set cmdheight=2                 "ch:    make a little more room for error messages
-set sidescroll=2                "ss:    only scroll horizontally little by little
-set scrolloff=1                 "so:    places a line between the current line and the screen edge
-hi Pmenu ctermbg=238 gui=bold
-set sidescrolloff=2             "siso:  places a couple columns between the current column and the screen edge
-set laststatus=2                "ls:    makes the status bar always visible
-set ttyfast                     "tf:    improves redrawing for newer computers
-set history=200                 "hi:    number of search patterns and ex commands to remember
-                                "       (also used by viminfo below for /, :, and @ options)
-set viminfo='200                "vi:    For a nice, huuuuuge viminfo file
-
-set switchbuf=usetab            "swb:   Jumps to first tab or window that contains specified buffer instead of duplicating an open window
-set showtabline=1               "stal:  Display the tabbar if there are multiple tabs. Use :tab ball or invoke Vim with -p
-set hidden                      "hid:   allows opening a new buffer in place of an existing one without first saving the existing one
-
-" Type <F1> follwed by a buffer number or name fragment to jump to it.
-" Also replaces the annoying help button. Based on tip 821.
-map <F1> :ls<cr>:b<space>
-
-" Quickly jump to a tag if there's only one match, otherwise show the list
-map <F2> :tj<space>
-
-" =====================================================================================
-inoremap <leader>s <esc>:w<cr>
-nnoremap <leader>s :w<cr>
-
-nmap <F3> :Ack "<C-r>=expand("<cword>")<CR>"<CR>
-"map <F1>	:w<CR>:bp<CR>
-"map <F2>	:w<CR>:bn<CR>
-"map <F5> <Esc>:EnableFastPHPFolds<Cr>
-"map <F6> <Esc>:EnablePHPFolds<Cr>
-"map <F7> <Esc>:DisablePHPFolds<Cr>
+""""""""""""""""""""""""""""""""
 "
-" switch between tabs
-""nmap 	  <C-SPACE>  :if &modifiable && !&readonly && &modified <CR> :endif<CR>:bnext<CR>
-nmap 	  <leader>l  :if &modifiable && !&readonly && &modified <CR> :endif<CR>:bnext<CR>
-"nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :endif<CR>:bprevious<CR>
-set hidden
-" Switch to alternate file
-nmap <Tab> :bnext<cr>
-nmap <S-Tab> :bprevious<cr>
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-nnoremap <silent> ss :split<CR>
-nnoremap <silent> vv :vsplit<CR>
-noremap <Up> <c-w>k
-noremap <Down> <c-w>j
-noremap <Right> <c-w>l
-noremap <Left> <c-w>h
+" COOL HACKS
+"
+""""""""""""""""""""""""""""""""
+" Make sure Vim returns to the same line when you reopen a file.
+augroup line_return
+    au!
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
 
-" Maps Omnicompletion to CTRL-space since ctrl-x ctrl-o is for Emacs-style RSI
-inoremap <nul> <C-X><C-O>
+" Visual Mode */# from Scrooloose
+function! s:VSetSearch()
+  let temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+  let @@ = temp
+endfunction
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
 
-" don't select first item, follow typing in autocomplete
-set completeopt=longest,menuone,preview
+highlight search ctermfg=white ctermbg=3423513
 
-""" Gundo settings
-nnoremap <F7> :GundoToggle<cr>
-
-"nnoremap      <C-SPACE>     i
-imap          <C-SPACE>     <C-x><C-u>
-"imap          <C-SPACE>     <C-x><C-o>
-map   <Leader>.    :BufExplorer<CR>
-map <Leader>x	:on<CR>
-map <Leader>y 	:bd#<CR>
-map <Leader><SPACE>	:w<CR>
-vmap   <Leader><Space>   :TComment<CR>
-" rekative line numbers
-function! NumberToggle()
-	if(&relativenumber == 1)
-		set norelativenumber
-		set number
-		highlight LineNr ctermfg=yellow
-	else
-		set relativenumber
-		highlight LineNr ctermfg=green
-	endif
-endfunc
-
-
-map <Leader>n :call NumberToggle()<cr>
-":au FocusLost * :set number
-":au FocusGained * :set relativenumber
-"autocmd InsertEnter * :set number
-"autocmd InsertLeave * :set relativenumber
-
-" auto corrector
-iab ture true
-iab flase false
-ia teh the
-ia finction function 
+""""""""""""""""""""""""""""""""
+"
+" BUG WORKAROUNDS
+"
+""""""""""""""""""""""""""""""""
+" realign buffers when iterm goes fullscreen
+augroup FixProportionsOnResize
+  au!
+  au VimResized * exe "normal! \<c-w>="
+augroup END
 
 " vim mode-switch lag fix
 if ! has("gui_running")
@@ -284,47 +226,234 @@ if ! has("gui_running")
     augroup END
 endif
 
-"autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
-if has("autocmd")
-	au FileType php,phtml,javascript,xml set smartindent
+" macos vs linux tclipboard
+if has("mac")
+  set clipboard+=unnamed
+else
+  set clipboard=unnamedplus
 endif
-" testing
-" Don't screw up folds when inserting text that might affect them, until
-" leaving insert mode. Foldmethod is local to the window. Protect against
-" screwing up folding when switching between windows.
-autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
-let g:SuperTabDefaultCompletionType = "context"
+" make C-a, C-x work properly
+set nrformats=
 
-" }}}
+" potential lag fix
+let g:matchparen_insert_timeout=1
 
-" ==============================================================================
-" Auto commands
-" ==============================================================================
-" {{{
-autocmd VimEnter * set vb t_vb=
+""""""""""""""""""""""""""""""""
+"
+" THINGS TODO ON NEW INSTALL
+"
+""""""""""""""""""""""""""""""""
+" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+"
+" Inside of ~/.vim make /tmp, inside of which mkdir swap backup undo
+"
+" install ctags, ack, ag
+" sudo packer -S silver-searcher-git ack ctags
+"
+" cd .vim/bundle/tern_for_vim/ && npm install
+" npm install -g jshint
 
-" Current line highlighting
-autocmd InsertLeave * se nocul
-autocmd InsertEnter * se cul
 
-let g:xml_syntax_folding=1
-au FileType xml  setlocal foldmethod=syntax
-au FileType vim  setlocal foldmethod=marker | setlocal foldlevel=0
-au FileType lua  setlocal foldmethod=marker | setlocal foldlevel=0
-au FileType php  setlocal foldmethod=syntax | setlocal foldlevel=99 | setlocal foldlevelstart=99
-au FileType html setlocal foldmethod=syntax
+" FOLDING
+"set foldenable          " enable folding
+"set foldlevelstart=10   " open most folds by default
+"set foldnestmax=10      " 10 nested fold max
+"set foldmethod=syntax   " fold based on indent level
+"set foldexpr=strlen(substitute(getline(v:lnum),'^\\s*[0-9]\.[0-9]*\\s*[0-9]\\(\\s*\\).*$','\\1',\"g\")) 
+"set foldmethod=expr
 
-" ==============================================================================
-" GUI
-" ==============================================================================
-" {{{
+" Auto resize Vim splits to active split
+" set winwidth=184
+" set winheight=15
+" set winminheight=15
+" set winheight=999
 
-" remove toolbar and scrollbars
-set guioptions-=T
-set guioptions-=L
-set guioptions-=R
-set guioptions-=r
-set nohls
-set nowrap
+" my bindings
+
+" nnoremap <C-s> :w<cr>
+" inoremap <C-s> <Esc>:w<cr>
+
+
+
+" :imap <Esc> <Esc>:w<CR>
+" switch between windows
+" g:UltiSnipsListSnippets <c-tab>
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'php' : 1,
+    \}
+
+set term=screen-256color
+" let g:toggleTabs = 1
+set showtabline=2
+
+" set title to actual path and filename
+:set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
+
+" nnoremap <leader>; <C-R>=Semicolonfun()<CR>
+fun! Semicolonfun() "{{{
+  call setline(line('.'), substitute(getline('.'), '\s*$', ';', ''))
+  return "\<End>"
+endfunction "}}}
+let g:phpcomplete_mappings = {
+   \ 'jump_to_def': '<C-]>',
+   \ 'jump_to_def_split': '<C-W><C-]>',
+   \ 'jump_to_def_vsplit': '<C-W><C-\>',
+   \}
+setlocal iskeyword-=\$
+
+set scrolloff=5
+
+
+inoreabbrev teh the
+inoreabbrev flase false
+" ab php <?php
+" autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+autocmd  FileType php setlocal omnifunc=phpcomplete#CompletePHP
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+
+" TAGLIST
+let Tlist_Use_Horiz_Window = 0
+let Tlist_Use_Split_Window = 1
+let Tlist_WinHeight = 15
+" com TTToggle NERDTreeToggle | TlistToggle | wincmd l
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_WinWidth = 60
+let Tlist_Close_On_Select = 1 "close taglist window once we selected something
+let Tlist_Exit_OnlyWindow = 1 "if taglist window is the only window left, exit vim
+let Tlist_Show_Menu = 1 "show Tags menu in gvim
+let Tlist_Show_One_File = 1 "show tags of only one file
+let Tlist_GainFocus_On_ToggleOpen = 1 "automatically switch to taglist window
+let Tlist_Highlight_Tag_On_BufEnter = 1 "highlight current tag in taglist window
+let Tlist_Process_File_Always = 1 "even without taglist window, create tags file, required for displaying tag in statusline
+let Tlist_Use_Right_Window = 1 "display taglist window on the right
+let Tlist_Display_Prototype = 1 "display full prototype instead of just function name"
+
+" VEDBUG
+" let g:vdebug_options["break_on_open"]=0
+let g:vdebug_options = {"break_on_open" : 0}
+
+" MAPPINGS
+
+nnoremap <leader>so :OpenSession 
+nnoremap <leader>ss :SaveSession 
+nnoremap <leader>sd :DeleteSession<CR>
+nnoremap <leader>sc :CloseSession<CR>
+
+"make enter break and do newlines
+" nnoremap <CR> O<Esc>j
+nnoremap <leader>j i<CR><Esc>==
+
+"make space in normal mode add space
+nnoremap <Space> i<Space><Esc>l
+
+" better scrolling
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
+
+" consistent menu navigation
+inoremap <C-j> <C-n>
+inoremap <C-k> <C-p>
+
+" intellij style autocomplete shortcut
+inoremap <C-@> <C-x><C-o>
+inoremap <C-Space> <C-x><C-o>
+nnoremap <leader>t :CtrlPMRU<CR>
+nnoremap <leader>bp :CtrlPBuffer<CR>
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+
+" easy motion rebinded
+nmap <leader>f <Plug>(easymotion-f2)
+nmap <leader>F <Plug>(easymotion-F2)
+"
+" reload all open buffers
+nnoremap <leader>Ra :tabdo exec "windo e!"
+
+"map next-previous jumps
+nnoremap <leader>m <C-o>
+nnoremap <leader>. <C-i>
+" Use :Subvert search
+nnoremap <leader>// :S /
+vnoremap <leader>// :S /
+
+" Use regular replace
+nnoremap <leader>s :%s /
+vnoremap <leader>s :%s /
+
+" Use :Subvert replace
+nnoremap <leader>S :%S /
+vnoremap <leader>S :%S /
+nnoremap <leader>G mG:Git! 
+nnoremap <leader>g :Git 
+nnoremap <leader>A :!ag 
+nnoremap <leader>a :Ag! 
+nnoremap <leader>hh :call clearmatches()<CR>:noh<CR>
+nnoremap <leader>q :bp<cr>:bd #<cr>
+
+" F KEYS
+:nmap <leader>1 :NERDTreeToggle<CR>
+:nmap <leader>2 :bp<CR>
+:nmap <leader>3 :bn<CR>
+nnoremap <leader>4 :TlistToggle<CR>
+:imap <F2> <ESC>:bp<CR>i
+:imap <F3> <ESC>:bn<CR>i
+" :nmap <F4> :TagbarToggle<CR>
+" :nmap <F4> :TlistToggle<CR>
+nnoremap <leader>6 :call pdv#DocumentWithSnip()<CR>
+nnoremap <leader>7 :call pdv#DocumentCurrentLine()<CR>
+map <leader>8 <Esc>:EnableFastPHPFolds<Cr>
+map <leader>9 <Esc>:EnablePHPFolds<Cr>
+" map <F10> <Esc>:DisablePHPFolds<Cr>
+nnoremap <leader>5 :GundoToggle<CR>
+set pastetoggle=<leader>0
+
+" nnoremap <leader>3 :TlistToggle<CR>
+" nnoremap <leader>1 :NERDTreeToggle<CR>
+
+" move windows
+nnoremap <silent> <Right> <c-w>l
+nnoremap <silent> <Left> <c-w>h
+nnoremap <silent> <Up> <c-w>k
+nnoremap <silent> <Down> <c-w>j
+nnoremap <silent> <C-l> <c-w>l
+nnoremap <silent> <C-h> <c-w>h
+nnoremap <silent> <C-k> <c-w>k
+nnoremap <silent> <C-j> <c-w>j
+" move tabs
+nmap <leader>t :tabn<cr>
+" switch next buffer
+nnoremap <leader><leader> <c-^>
+" space open/closes folds
+nnoremap <space> za
+:imap jj <Esc>
+inoremap <S-Tab> <esc>A
+" :imap kk :w<CR>
+" fast save
+nmap <leader>w :w!<cr>
+" remove hl
+map <silent> <leader><cr> :noh<cr>
+:nmap <D-w> <C-w>
+" saving
+nnoremap <leader>s :w<cr>
+" move on wrapped lines
+map j gj
+map k gk
+nnoremap <leader>; :call Semicolonfun()<CR>
+" highlight ajustment
+highligh MatchParen cterm=bold ctermbg=none ctermfg=green
+
+" PHPDoc settings
+if !exists("g:pdv_cfg_Author")
+	let g:pdv_cfg_Author = "Martin von Wysiecki <wysiecki@gmail.com>"
+endif
+let g:buftabline_show = 2
+
+nmap <Tab> :bnext<cr>
+nmap <S-Tab> :bprevious<cr>
