@@ -54,6 +54,14 @@ Bundle "jonathanfilip/vim-lucius"
 syntax on
 let g:lightline = {}
 let g:lightline.colorscheme = 'hybrid'
+let g:lightline = {
+			\ 'component_function': {
+      \   'filename': 'LightLineFilename'
+      \ }
+      \ }
+function! LightLineFilename()
+	  return expand('%')
+  endfunction
 
 let g:solarized_termcolors= 256 
 let g:solarized_visibility = "low"
