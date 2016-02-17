@@ -41,6 +41,7 @@ Bundle "shawncplus/phpcomplete.vim"
 Bundle "Valloric/MatchTagAlways"
 Bundle "tobyS/vmustache"
 Bundle "tobyS/pdv"
+Bundle "SirVer/ultisnips"
 Bundle "vim-scripts/phpfolding.vim"
 Bundle "joonty/vdebug"
 Bundle "mattn/emmet-vim"
@@ -50,6 +51,19 @@ Bundle "itchyny/lightline.vim"
 Bundle 'cocopon/lightline-hybrid.vim'
 Bundle "ap/vim-buftabline"
 Bundle "jonathanfilip/vim-lucius"
+Bundle "Xuyuanp/nerdtree-git-plugin"
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
 
 syntax on
 let g:lightline = {}
