@@ -469,7 +469,7 @@ map j gj
 map k gk
 nnoremap <leader>; :call Semicolonfun()<CR>
 " highlight ajustment
-highligh MatchParen cterm=bold ctermbg=none ctermfg=green
+highligh MatchParen cterm=bold ctermbg=none ctermfg=red
 
 " PHPDoc settings
 if !exists("g:pdv_cfg_Author")
