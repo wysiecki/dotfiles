@@ -10,6 +10,7 @@ set regexpengine=1
 	set nocompatible
 	set encoding=utf-8
 	set shell=/bin/sh
+	" set tags=./tags,~/.vim/tags
 
 	" start vundler
 	filetype off
