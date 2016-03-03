@@ -10,7 +10,8 @@ set regexpengine=1
 	set nocompatible
 	set encoding=utf-8
 	set shell=/bin/sh
-	" set tags=./tags,~/.vim/tags
+	set tags=tags,~/.vim/tags
+	" set tags=./tags
 
 	" start vundler
 	filetype off
@@ -315,8 +316,10 @@ let g:mta_filetypes = {
     \ 'jinja' : 1,
     \ 'php' : 1,
     \}
-
-" set term=screen-256color
+if has("nvim")
+else
+	set term=screen-256color
+endif
 " let g:toggleTabs = 1
 set showtabline=2
 
@@ -434,7 +437,9 @@ nnoremap <leader>q :bp<cr>:bd #<cr>
 :nmap <leader>2 :bp<CR>
 :nmap <leader>3 :bn<CR>
 nnoremap <leader>4 :TlistToggle<CR>
-:imap <F2> <ESC>:bp<CR>i
+" :imap <silent> <C-;> <Right>
+" inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+imap <c-b> <right>
 :imap <F3> <ESC>:bn<CR>i
 " :nmap <F4> :TagbarToggle<CR>
 " :nmap <F4> :TlistToggle<CR>
@@ -464,7 +469,6 @@ nmap <leader>t :tabn<cr>
 nnoremap <leader><leader> <c-^>
 " space open/closes folds
 nnoremap <space> za
-:imap jj <Esc>
 inoremap <S-Tab> <esc>A
 " :imap kk :w<CR>
 " fast save
