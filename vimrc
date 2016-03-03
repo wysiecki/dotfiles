@@ -490,6 +490,5 @@ if !exists("g:pdv_cfg_Author")
 	let g:pdv_cfg_Author = "Martin von Wysiecki <wysiecki@gmail.com>"
 endif
 let g:buftabline_show = 2
-
 nmap <Tab> :bnext<cr>
 nmap <S-Tab> :bprevious<cr>
