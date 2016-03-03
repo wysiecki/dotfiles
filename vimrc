@@ -20,6 +20,9 @@ set regexpengine=1
 " core plugins
 Bundle "gmarik/vundle"
 Bundle "sjl/gundo.vim"
+Bundle 'Shougo/vimproc.vim'
+Bundle 'Shougo/unite.vim'
+Bundle 'm2mdas/phpcomplete-extended'
 Bundle "kien/ctrlp.vim"
 Bundle "scrooloose/syntastic.git"
 Bundle "vim-scripts/tComment"
@@ -38,7 +41,7 @@ Bundle "rhysd/clever-f.vim"
 Bundle "scrooloose/nerdtree"
 Bundle "vim-scripts/taglist.vim"
 Bundle "ervandew/supertab"
-Bundle "shawncplus/phpcomplete.vim"
+" Bundle "shawncplus/phpcomplete.vim"
 Bundle "Valloric/MatchTagAlways"
 Bundle "tobyS/vmustache"
 Bundle "tobyS/pdv"
@@ -66,6 +69,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 
+let g:phpcomplete_index_composer_command="/usr/local/bin/composer"
 syntax on
 let g:lightline = {}
 let g:lightline.colorscheme = 'hybrid'
@@ -312,7 +316,7 @@ let g:mta_filetypes = {
     \ 'php' : 1,
     \}
 
-set term=screen-256color
+" set term=screen-256color
 " let g:toggleTabs = 1
 set showtabline=2
 
@@ -338,8 +342,13 @@ inoreabbrev teh the
 inoreabbrev flase false
 " ab php <?php
 " autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
-autocmd  FileType php setlocal omnifunc=phpcomplete#CompletePHP
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+" autocmd  FileType php setlocal omnifunc=phpcomplete#CompletePHP
+autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+" let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabContextDiscoverDiscovery = ['&completefunc:<c-n>', '&omnifunc:<c-x><c-o>']
 
 " TAGLIST
 let Tlist_Use_Horiz_Window = 0
