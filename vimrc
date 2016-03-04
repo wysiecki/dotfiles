@@ -24,6 +24,8 @@ Bundle "sjl/gundo.vim"
 " Bundle 'Shougo/vimproc.vim'
 " Bundle 'Shougo/unite.vim'
 " Bundle 'm2mdas/phpcomplete-extended'
+Bundle "vim-airline/vim-airline"
+Bundle 'vim-airline/vim-airline-themes'
 Bundle "mkusher/padawan.vim"
 Bundle "kien/ctrlp.vim"
 Bundle "scrooloose/syntastic.git"
@@ -53,9 +55,9 @@ Bundle "joonty/vdebug"
 Bundle "mattn/emmet-vim"
 Bundle "alvan/vim-php-manual"
 Bundle "altercation/vim-colors-solarized"
-Bundle "itchyny/lightline.vim"
-Bundle 'cocopon/lightline-hybrid.vim'
-Bundle "ap/vim-buftabline"
+" Bundle "itchyny/lightline.vim"
+" Bundle 'cocopon/lightline-hybrid.vim'
+" Bundle "ap/vim-buftabline"
 Bundle "jonathanfilip/vim-lucius"
 Bundle "Xuyuanp/nerdtree-git-plugin"
 let g:NERDTreeIndicatorMapCustom = {
@@ -75,23 +77,45 @@ let $PATH=$PATH . ':' . expand('~/.composer/vendor/bin')
 let g:phpcomplete_index_composer_command="/usr/local/bin/composer"
 let g:padawan#composer_command = "/usr/local/bin/composer"
 syntax on
-let g:lightline = {}
-let g:lightline.colorscheme = 'hybrid'
-let g:lightline = {
-			\ 'component_function': {
-      \   'filename': 'LightLineFilename'
-      \ }
-      \ }
-function! LightLineFilename()
-	  return expand('%')
-  endfunction
+" let g:lightline = {}
+" let g:lightline.colorscheme = 'hybrid'
+" let g:lightline = {
+" 			\ 'component_function': {
+"       \   'filename': 'LightLineFilename'
+"       \ }
+"       \ }
+" function! LightLineFilename()
+" 	  return expand('%')
+"   endfunction
+
+colorscheme solarized
+set background=dark
+
+let g:airline_theme="solarized"
+let g:airline_powerline_fonts=1
+let g:airline_section_warning = airline#section#create([ "syntastic"  ])
+let g:airline#extensions#branch#empty_message  =  "No SCM"
+let g:airline#extensions#whitespace#enabled    =  0
+let g:airline#extensions#syntastic#enabled     =  1
+let g:airline#extensions#tabline#enabled       =  1
+let g:airline#extensions#tabline#tab_nr_type   =  1 " tab number
+let g:airline#extensions#tabline#fnamecollapse =  1 " /a/m/model.rb
+let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
+let g:airline#extensions#tabline#fnamemod = ':t'
+set guifont=Sauce\ Code\ Powerline:h13
+let g:Powerline_symbols = 'unicode'
+set encoding=utf-8
+set fillchars+=stl:\ ,stlnc:\
+let mapleader=','
+let g:airline_powerline_fonts = 1
+set laststatus=2"
 
 let g:solarized_termcolors= 256 
-let g:solarized_visibility = "low"
+" let g:solarized_visibility = "low"
 let g:DisableAutoPHPFolding = 1
 let g:hardtime_default_on = 1
-colorscheme lucius
-set background=light
+" colorscheme lucius
+" set background=light
 " enable all the plugins
 filetype plugin indent on
 
