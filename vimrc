@@ -26,7 +26,12 @@ Bundle "sjl/gundo.vim"
 " Bundle 'm2mdas/phpcomplete-extended'
 Bundle "vim-airline/vim-airline"
 Bundle 'vim-airline/vim-airline-themes'
-Bundle "mkusher/padawan.vim"
+
+" Bundle "mkusher/padawan.vim"
+"
+" Bundle "phpvim/phpcd.vim"
+" Bundle "vim-scripts/progressbar-widget"
+"
 Bundle "kien/ctrlp.vim"
 Bundle "scrooloose/syntastic.git"
 Bundle "vim-scripts/tComment"
@@ -45,7 +50,7 @@ Bundle "rhysd/clever-f.vim"
 Bundle "scrooloose/nerdtree"
 Bundle "vim-scripts/taglist.vim"
 Bundle "ervandew/supertab"
-" Bundle "shawncplus/phpcomplete.vim"
+Bundle "shawncplus/phpcomplete.vim"
 Bundle "Valloric/MatchTagAlways"
 Bundle "tobyS/vmustache"
 Bundle "tobyS/pdv"
@@ -55,9 +60,30 @@ Bundle "joonty/vdebug"
 Bundle "mattn/emmet-vim"
 Bundle "alvan/vim-php-manual"
 Bundle "altercation/vim-colors-solarized"
-" Bundle "itchyny/lightline.vim"
-" Bundle 'cocopon/lightline-hybrid.vim'
-" Bundle "ap/vim-buftabline"
+"
+Bundle "Shougo/deoplete.nvim"
+" Bundle "Shougo/neocomplete.vim"
+" let g:acp_enableAtStartup = 1
+" " Use neocomplete.
+" let g:neocomplete#enable_at_startup = 1
+" " Use smartcase.
+" let g:neocomplete#enable_smart_case = 1
+" " let g:deoplete#enable_at_startup = 1
+" let g:neocomplete#force_omni_input_patterns = {}
+" let g:neocomplete#force_omni_input_patterns.php = '\h\w*\|[^- \t]->\w*'
+" " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" " let g:deoplete#omni_patterns = {}
+" " let g:deoplete#omni_patterns.php = '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+" set omnifunc=syntaxcomplete#Complete
+set omnifunc=padawan#Complete
+" set omnifunc=phpcd#Complete
+autocmd FileType php setlocal omnifunc=padawan#CompletePHP
+
+" autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+let g:deoplete#enable_at_startup = 1
+"
+" let g:deoplete#auto_completion_start_length = 1
 Bundle "jonathanfilip/vim-lucius"
 Bundle "Xuyuanp/nerdtree-git-plugin"
 let g:NERDTreeIndicatorMapCustom = {
@@ -89,7 +115,7 @@ syntax on
 "   endfunction
 
 colorscheme solarized
-set background=dark
+set background=light
 
 let g:airline_theme="solarized"
 let g:airline_powerline_fonts=1
@@ -373,7 +399,8 @@ inoreabbrev flase false
 " ab php <?php
 " autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
 " autocmd  FileType php setlocal omnifunc=phpcomplete#CompletePHP
-autocmd  FileType  php setlocal omnifunc=padawan#Complete
+" autocmd  FileType  php setlocal omnifunc=padawan#Complete
+" autocmd  FileType  php setlocal omnifunc=phpcd
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " let g:SuperTabDefaultCompletionType = 'context'
 " let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
