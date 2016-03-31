@@ -1,0 +1,30 @@
+==============================================================================
+Author:  Martin von Wysiecki <wysiecki@gmail.com>
+==============================================================================
+Tricks - Yii2
+
+Grid
+-- edit action column
+	'class' => 'yii\grid\ActionColumn',
+	'template'=>'{view} {update} {delete}',
+	'urlCreator' => function($action, $model, $key, $index) {
+
+-- add custom dropdown {active non active}
+	add field to rules() in query model in section 'safe'
+		ex.  [['active', ...], 'safe'],
+	add andFilterWhere
+		ex. ->andFilterWhere(['like', 'active', $this->active])
+	'filter'=>array('1'=>'Active','0'=>'Not Active'),
+	add custom format
+		ex. 'format' => 'state',
+
+-- add custom sorting for custom fileds, add in query model, method search()
+		before $query->load();
+		$dataProvider->sort->attributes['companyId'] = [
+			'asc' => ['company_name' => SORT_ASC],
+			'desc' => ['company_name' => SORT_DESC],
+		];
+
+-- gen translation files
+	./yii message/extract @common/config/i18n.php
+

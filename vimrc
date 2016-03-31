@@ -7,10 +7,11 @@ set regexpengine=1
 
 	""""""""""""""""""""""""""""""""
 	" not a vi
-	set nocompatible
-	set encoding=utf-8
-	set shell=/bin/sh
-	set tags=tags,~/.vim/tags
+set nocompatible
+set encoding=utf-8
+set shell=/bin/sh
+set encoding=utf-8
+set tags=tags,~/.vim/tags
 	" set tags=./tags
 
 	" start vundler
@@ -21,25 +22,29 @@ set regexpengine=1
 " core plugins
 Bundle "gmarik/vundle"
 Bundle "sjl/gundo.vim"
-" Bundle 'Shougo/vimproc.vim'
-" Bundle 'Shougo/unite.vim'
-" Bundle 'm2mdas/phpcomplete-extended'
 Bundle "vim-airline/vim-airline"
 Bundle 'vim-airline/vim-airline-themes'
 
-" Bundle "mkusher/padawan.vim"
-"
-" Bundle "phpvim/phpcd.vim"
-" Bundle "vim-scripts/progressbar-widget"
-"
 Bundle "kien/ctrlp.vim"
+
+" Bundle 'Shougo/vimproc.vim', { 'do': 'make' }
+" Bundle 'Shougo/unite.vim'
+" Bundle 'rstacruz/vim-fastunite'
+"
+" Bundle 'Shougo/neomru.vim'
+" Bundle 'Shougo/unite-outline'
+" Bundle 'tsukkee/unite-tag'
+"
+" map <C-p> [unite]p
+
+" remember foldig
+Bundle "kopischke/vim-stay"
 Bundle "scrooloose/syntastic.git"
 Bundle "vim-scripts/tComment"
 Bundle "tpope/vim-surround"
 Bundle "mileszs/ack.vim"
 Bundle "rking/ag.vim"
 Bundle "edsono/vim-matchit"
-" Bundle "bronson/vim-trailing-whitespace"
 Bundle "tpope/vim-fugitive"
 Bundle "jiangmiao/auto-pairs"
 Bundle "xolox/vim-session"
@@ -60,29 +65,25 @@ Bundle "joonty/vdebug"
 Bundle "mattn/emmet-vim"
 Bundle "alvan/vim-php-manual"
 Bundle "altercation/vim-colors-solarized"
+Bundle "MattesGroeger/vim-bookmarks"
 "
-Bundle "Shougo/deoplete.nvim"
-" Bundle "Shougo/neocomplete.vim"
-" let g:acp_enableAtStartup = 1
-" " Use neocomplete.
-" let g:neocomplete#enable_at_startup = 1
-" " Use smartcase.
-" let g:neocomplete#enable_smart_case = 1
-" " let g:deoplete#enable_at_startup = 1
-" let g:neocomplete#force_omni_input_patterns = {}
-" let g:neocomplete#force_omni_input_patterns.php = '\h\w*\|[^- \t]->\w*'
-" " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-" " let g:deoplete#omni_patterns = {}
-" " let g:deoplete#omni_patterns.php = '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-" set omnifunc=syntaxcomplete#Complete
-set omnifunc=padawan#Complete
-" set omnifunc=phpcd#Complete
-autocmd FileType php setlocal omnifunc=padawan#CompletePHP
+Bundle "Shougo/neocomplete.vim"
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 0
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
+
+" Bundle "Shougo/deoplete.nvim"
 " autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 "
+set omnifunc=phpcomplete#CompletePHP
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 " let g:deoplete#auto_completion_start_length = 1
 Bundle "jonathanfilip/vim-lucius"
 Bundle "Xuyuanp/nerdtree-git-plugin"
@@ -99,25 +100,13 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 
-let $PATH=$PATH . ':' . expand('~/.composer/vendor/bin')
-let g:phpcomplete_index_composer_command="/usr/local/bin/composer"
-let g:padawan#composer_command = "/usr/local/bin/composer"
 syntax on
-" let g:lightline = {}
-" let g:lightline.colorscheme = 'hybrid'
-" let g:lightline = {
-" 			\ 'component_function': {
-"       \   'filename': 'LightLineFilename'
-"       \ }
-"       \ }
-" function! LightLineFilename()
-" 	  return expand('%')
-"   endfunction
 
-colorscheme solarized
+" colorscheme solarized
+colorscheme lucius
 set background=light
 
-let g:airline_theme="solarized"
+let g:airline_theme="marcin"
 let g:airline_powerline_fonts=1
 let g:airline_section_warning = airline#section#create([ "syntastic"  ])
 let g:airline#extensions#branch#empty_message  =  "No SCM"
@@ -130,10 +119,8 @@ let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
 let g:airline#extensions#tabline#fnamemod = ':t'
 set guifont=Sauce\ Code\ Powerline:h13
 let g:Powerline_symbols = 'unicode'
-set encoding=utf-8
-set fillchars+=stl:\ ,stlnc:\
+" set fillchars+=stl:\ ,stlnc:\
 let mapleader=','
-let g:airline_powerline_fonts = 1
 set laststatus=2"
 
 let g:solarized_termcolors= 256 
@@ -145,6 +132,50 @@ let g:hardtime_default_on = 1
 " enable all the plugins
 filetype plugin indent on
 
+" Syntastic  {
+    let g:syntastic_javascript_checkers = ['jsl']
+    let g:syntastic_enable_signs = 1
+    let g:syntastic_error_symbol = '✗'
+    let g:syntastic_style_error_symbol = '✠'
+    let g:syntastic_warning_symbol = '∆'
+    let g:syntastic_style_warning_symbol = '≈'
+    " Configure syntastic syntax checking to check on open as well as save.
+    let g:syntastic_check_on_open=1
+    let g:syntastic_aggregate_errors=1
+    let g:syntastic_auto_jump=2
+	"let g:syntastic_php_phpcs_args="--standard=PSR2 -n --report=csv"
+	let g:syntastic_php_phpcs_args="--standard=PSR1"
+
+    " Don"t show specific errors when editing HTML-types.
+    let g:syntastic_html_tidy_ignore_errors = [ '<input> proprietary attribute "role"',
+                                                    \'<i> proprietary attribute "rowid"',
+                                                    \"trimming empty <i>",
+                                                    \'<img> lacks "alt" attribute',
+                                                    \"trimming empty <span>",
+                                                    \"<input> proprietary attribute \"autocomplete\"",
+                                                    \"proprietary attribute \"role\"",
+                                                    \"proprietary attribute \"hidden\"",
+                                                \]
+" PHP {
+   let php_htmlInStrings         = 1 " Syntax highlight HTML code inside PHP strings.
+   let php_sql_query             = 1 " Syntax highlight SQL code inside PHP strings.
+   " let php_noShortTags           = 1 " Disable PHP short tags.
+   let php_parent_error_close    = 1
+   let php_parent_error_open     = 1
+   " let php_alt_comparisons       = 1
+   " let php_alt_assignByReference = 1
+" }
+
+" Always splits to the right and below
+set splitright
+set splitbelow
+
+" Boost performance of rendering long lines
+set synmaxcol=200
+
+" Lower the delay of escaping out of other modes
+" set timeout timeoutlen=1000 ttimeoutlen=1
+set timeout timeoutlen=200 ttimeoutlen=1
 """"""""""""""""""""""""""""""""
 "
 " SETTINGS & KEYBINDINGS
@@ -251,9 +282,6 @@ if executable("ag")
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-" reload ctags
-" nnoremap <leader>C :!ctags -R --exclude=.git --exclude=log --exclude=tmp *<CR><CR>
-
 " git and ack stuff
 let g:gitgutter_enabled = 1
 let g:gitgutter_realtime = 0
@@ -352,14 +380,13 @@ let g:matchparen_insert_timeout=1
 
 " my bindings
 
-" nnoremap <C-s> :w<cr>
-" inoremap <C-s> <Esc>:w<cr>
-
-
-
-" :imap <Esc> <Esc>:w<CR>
 " switch between windows
 " g:UltiSnipsListSnippets <c-tab>
+let g:UltiSnipsSnippetsDir        = '~/.vim/UltiSnips/'
+" Set ultisnips triggers
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 
 let g:mta_filetypes = {
@@ -376,8 +403,6 @@ endif
 " let g:toggleTabs = 1
 set showtabline=2
 
-" set title to actual path and filename
-:set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
 
 " nnoremap <leader>; <C-R>=Semicolonfun()<CR>
 fun! Semicolonfun() "{{{
@@ -389,6 +414,7 @@ let g:phpcomplete_mappings = {
    \ 'jump_to_def_split': '<C-W><C-]>',
    \ 'jump_to_def_vsplit': '<C-W><C-\>',
    \}
+" in PHP $ is a keyword
 setlocal iskeyword-=\$
 
 set scrolloff=5
@@ -396,11 +422,6 @@ set scrolloff=5
 
 inoreabbrev teh the
 inoreabbrev flase false
-" ab php <?php
-" autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
-" autocmd  FileType php setlocal omnifunc=phpcomplete#CompletePHP
-" autocmd  FileType  php setlocal omnifunc=padawan#Complete
-" autocmd  FileType  php setlocal omnifunc=phpcd
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " let g:SuperTabDefaultCompletionType = 'context'
 " let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
@@ -430,18 +451,23 @@ let Tlist_Display_Prototype = 1 "display full prototype instead of just function
 let g:vdebug_options = {"break_on_open" : 0}
 
 " MAPPINGS
-
+set pastetoggle=<leader>0
+nnoremap <leader>1 :NERDTreeToggle<CR>
+nnoremap <leader>2 :bp<CR>
+nnoremap <leader>3 :bn<CR>
+nnoremap <leader>4 :TlistToggle<CR>
+nnoremap <leader>5 :GundoToggle<CR>
+nnoremap <leader>6 :call pdv#DocumentWithSnip()<CR>
+nnoremap <leader>7 :call pdv#DocumentCurrentLine()<CR>
+nnoremap <leader>8 <Esc>:EnableFastPHPFolds<Cr>
+nnoremap <leader>9 <Esc>:EnablePHPFolds<Cr>
+" map <F10> <Esc>:DisablePHPFolds<Cr>
+" Sessions
 nnoremap <leader>so :OpenSession 
 nnoremap <leader>ss :SaveSession 
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
 
-"make enter break and do newlines
-" nnoremap <CR> O<Esc>j
-nnoremap <leader>j i<CR><Esc>==
-
-"make space in normal mode add space
-nnoremap <Space> i<Space><Esc>l
 
 " better scrolling
 nnoremap <C-j> <C-d>
@@ -452,18 +478,14 @@ inoremap <C-j> <C-n>
 inoremap <C-k> <C-p>
 
 " intellij style autocomplete shortcut
-inoremap <C-@> <C-x><C-o>
 inoremap <C-Space> <C-x><C-o>
 nnoremap <leader>t :CtrlPMRU<CR>
 nnoremap <leader>bp :CtrlPBuffer<CR>
-nnoremap <Leader>fu :CtrlPFunky<Cr>
 
 " easy motion rebinded
 nmap <leader>f <Plug>(easymotion-f2)
 nmap <leader>F <Plug>(easymotion-F2)
 "
-" reload all open buffers
-nnoremap <leader>Ra :tabdo exec "windo e!"
 
 "map next-previous jumps
 nnoremap <leader>m <C-o>
@@ -486,28 +508,6 @@ nnoremap <leader>a :Ag!
 nnoremap <leader>hh :call clearmatches()<CR>:noh<CR>
 nnoremap <leader>q :bp<cr>:bd #<cr>
 
-" F KEYS
-:nmap <leader>1 :NERDTreeToggle<CR>
-:nmap <leader>2 :bp<CR>
-:nmap <leader>3 :bn<CR>
-nnoremap <leader>4 :TlistToggle<CR>
-" :imap <silent> <C-;> <Right>
-" inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
-imap <c-b> <right>
-:imap <F3> <ESC>:bn<CR>i
-" :nmap <F4> :TagbarToggle<CR>
-" :nmap <F4> :TlistToggle<CR>
-nnoremap <leader>6 :call pdv#DocumentWithSnip()<CR>
-nnoremap <leader>7 :call pdv#DocumentCurrentLine()<CR>
-map <leader>8 <Esc>:EnableFastPHPFolds<Cr>
-map <leader>9 <Esc>:EnablePHPFolds<Cr>
-" map <F10> <Esc>:DisablePHPFolds<Cr>
-nnoremap <leader>5 :GundoToggle<CR>
-set pastetoggle=<leader>0
-
-" nnoremap <leader>3 :TlistToggle<CR>
-" nnoremap <leader>1 :NERDTreeToggle<CR>
-
 " move windows
 nnoremap <silent> <Right> <c-w>l
 nnoremap <silent> <Left> <c-w>h
@@ -517,6 +517,7 @@ nnoremap <silent> <C-l> <c-w>l
 nnoremap <silent> <C-h> <c-w>h
 nnoremap <silent> <C-k> <c-w>k
 nnoremap <silent> <C-j> <c-w>j
+
 " move tabs
 nmap <leader>t :tabn<cr>
 " switch next buffer
@@ -527,14 +528,22 @@ inoremap <S-Tab> <esc>A
 " :imap kk :w<CR>
 " fast save
 nmap <leader>w :w!<cr>
+
+" regenerate tags file
+nmap <leader>tt :!ctags -R --fields=+aimS --languages=php --totals=yes<CR>
+
+" open cheatsheet
+nmap <leader>h :sp ~/dotfiles/cheatsheet.txt<CR>
+" open yii2 cheatsheet
+nmap <leader>y :sp ~/dotfiles/yii2.txt<CR>
 " remove hl
 map <silent> <leader><cr> :noh<cr>
 :nmap <D-w> <C-w>
 " saving
-nnoremap <leader>s :w<cr>
 " move on wrapped lines
 map j gj
 map k gk
+" set a ; at the end of the line
 nnoremap <leader>; :call Semicolonfun()<CR>
 " highlight ajustment
 highligh MatchParen cterm=bold ctermbg=none ctermfg=red

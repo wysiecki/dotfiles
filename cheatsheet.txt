@@ -1,0 +1,160 @@
+==============================================================================
+Author:  Martin von Wysiecki <wysiecki@gmail.com>
+==============================================================================
+Tricks - VIM
+
+http://vimcolorschemetest.googlecode.com/svn/html/index-c.html
+
+ctrl h - l  = zmieniamy window
+
+w next word                     b pref word                     () next pref paragraph                  a insert after letter
+A insert na koncu linii         o new line ponizej              O new line powyzej
+f find character 
+; move next
+, move prev
+
+,tt  regenerete tags file
+
+
+remove ^M 
+:%s/\r//g
+
+Comments
+gcc
+gcip
+
+
+ctags:
+	/usr/local/bin/ctags -R --fields=+aimS --languages=php --totals=yes
+search in tags
+:tselect tagname
+
+:UltiSnipsEdit (edit fileType snips)
+
+	KEYSTROKES
+
+	ctrl+]   back ctrl+t  VAR-FILE Definition				BOOKMARKS
+	,0 PASTE Toggle											`m - go to mark m (native)
+	,1 NERDTree												mm - Add/toggle bookmark
+	,2 buffer prev											mi - Add bookamrk annotate
+	,3 buffer right											mn,mp - move next, prev
+	,4 TagList												mc - clear bookmarks in buffer
+	,5 UNDO List
+	,6 pdv#DocumentWithSnip()
+	,7 pdv#DocumentCurrentLine()
+	,8 EnableFastPHPFolds
+	,9 EnablePHPFolds
+															SURROUND
+	p @tagbar jumps only									ds' - delete ' surrounding
+	,m ,. jump to last position								cs'"	change surrounding from ' to "
+	,q close buffer											yss'	add surrounding ' (second s for sentense)
+	% jump brackets											ysiw'	add inner word surround
+	* (star) search for word under cursor j
+	j=> n for next											EMMET
+	g* same as above but middle of the word					C-y, - expand emmet (table>tr>td*2)
+	P paste after cursor
+	p paste before cursor									GIT
+	ctrl-v block visual selection							:Gstatus - git status
+	zz center of the screen									:Gdiff HEAD - git diff to repository
+	kk insert saves file
+	CTRL i or o  jumps cursor positiions
+	ctrl V block visual mode
+	ctrl O single command inside insert mode
+	‘’ return to last cursor position
+
+	MARKS
+	mm set mark called m
+	`m  return to mark m
+	
+	REPLACE inner word
+	viwp
+	
+	CLEVER-F
+	move f F
+	
+	EASY MOTION
+	,,w
+	
+	TABULARIZE
+	‘dupa’ => $dupa
+	‘dupadupa’ => $dupa
+	:Tabularize /=
+	‘dupa’		=> $dupa
+	‘dupadupa’	=> $dupa
+	
+	CtrlP
+	c-return pionowy split
+	c-v pozimy split
+	c-z multiple selection
+	F5 refresh index
+	CtrlPLine szuka po tekscie w otwartych buforach
+	,fu CtrlFunky szuka po definicjach
+	
+	WINDOWS
+	c-q w Close window
+	c-w shift l moves window
+	
+	NERDTree
+	i open file poziomo split
+	s open file pionowo
+	I toggle hidden files
+	R refresh list
+	
+	
+	tComment
+	gcc comment
+	gcip comment block
+	
+	
+	,; dodaje ; na koncu
+	
+	
+	GIT
+	:Gstatus => :q
+	:Gdiff => :q
+	
+	TAGS
+	:ts slowo
+	
+	
+	clever-f
+	f{char} move to next with f
+	
+	SNIPPET
+	from wildmenu
+	ctrl j or k + ctrl tab select
+	
+	VIMMDIFF
+	:Gdiff HEAD (albo inna rewizja)
+	
+	HARDTIME
+	:HardTimeToggle
+	:HardTimeOff
+	
+	UltiSnips
+	:UltiSnipsEdit
+	
+	VimZoom
+	ctrl-w o   [toggle zoom]
+	
+	search&REPLACE
+	:%s/co wymieniamy/na co/g
+	:%s/foo/bar/gc    :: potweirdzenie
+	
+	vDEBUG
+	?XDEBUG_SESSION_START=1
+	
+	* <F5>: start/run (to next breakpoint/end of script)
+	* <F2>: step over
+	* <F3>: step into
+	* <F4>: step out
+	* <F6>: stop debugging (kills script)
+	* <F7>: detach script from debugger
+	* <F9>: run to cursor
+	* <F10>: toggle line breakpoint
+	* <F11>: show context variables (e.g. after "eval")
+	* <F12>: evaluate variable under cursor
+	* :Breakpoint <type> <args>: set a breakpoint of any type (see :help VdebugBreakpoints)
+	* :VdebugEval <code>: evaluate some code and display the result
+	* <Leader>e: evaluate the expression under visual highlight and display the result
+	
