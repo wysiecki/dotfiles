@@ -1,6 +1,6 @@
 dotfiles
 ========
-This is my two cents for PHP development with VIM. (Vim as PHP-IDE)
+This are my two cents for PHP development with VIM. (Vim as PHP-IDE)
 
 With pretty neat code-autocomplete. Almost intelligent. :-)
 
