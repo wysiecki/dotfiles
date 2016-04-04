@@ -1,5 +1,15 @@
 dotfiles
 ========
+This is my two cents for PHP development with VIM. (Vim as PHP-IDE)
+
+With pretty neat code-autocomplete. Almost intelligent. :-)
+
+Vim has to be compiled with +lua.
+
+Tested on OSX and Ubuntu-Linux.
+
+<leader>h gives a cheat-sheet.
+
 following .vim dir structure:
 
 .vim/<br>
