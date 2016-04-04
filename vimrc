@@ -66,6 +66,10 @@ Bundle "mattn/emmet-vim"
 Bundle "alvan/vim-php-manual"
 Bundle "altercation/vim-colors-solarized"
 Bundle "MattesGroeger/vim-bookmarks"
+
+" better indentation of html inside php
+Bundle "captbaritone/better-indent-support-for-php-with-html"
+Bundle 'vim-scripts/ZoomWin'
 "
 Bundle "Shougo/neocomplete.vim"
 let g:acp_enableAtStartup = 0
@@ -328,11 +332,17 @@ augroup END
 " vim mode-switch lag fix
 if ! has("gui_running")
     set ttimeoutlen=10
+	set term=screen-256color
     augroup FastEscape
         autocmd!
         au InsertEnter * set timeoutlen=0
         au InsertLeave * set timeoutlen=1000
     augroup END
+endif
+if has("gui_running")
+	set go-=r
+	set go-=L
+	set go-=T
 endif
 
 " macos vs linux tclipboard
@@ -398,7 +408,6 @@ let g:mta_filetypes = {
     \}
 if has("nvim")
 else
-	set term=screen-256color
 endif
 " let g:toggleTabs = 1
 set showtabline=2
