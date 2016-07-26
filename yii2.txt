@@ -3,6 +3,26 @@ Author:  Martin von Wysiecki <wysiecki@gmail.com>
 ==============================================================================
 Tricks - Yii2
 
+INSTALLATION OF advanced template:
+composer global require "fxp/composer-asset-plugin:~1.1.1"
+composer create-project --prefer-dist yiisoft/yii2-app-advanced yii-application
+
+php ./init
+./yii migrate
+
+STANDARD VALUES
+
+//whole logged user
+$user = \Yii::$app->user->identity;
+
+//id of logged user
+$userId = \Yii::$app->user->identity->id
+
+
+REQUESTS:
+$request = \Yii::$app->request;
+$name = $request->post('name');
+
 Grid
 -- edit action column
 	'class' => 'yii\grid\ActionColumn',
@@ -24,7 +44,52 @@ Grid
 			'asc' => ['company_name' => SORT_ASC],
 			'desc' => ['company_name' => SORT_DESC],
 		];
+-- add custom related text field
+		in query model:
+			add filed name [public $testName]
+			add to rules safe [['testanme'],'safe']
+			add search method:
+				$query->joinWith(['relTable'])
+				$query->andFilterWhere('like', 'table.filed', $this->testName)
+			in gridView attribute 'testName'
 
 -- gen translation files
-	./yii message/extract @common/config/i18n.php
+./yii message/extract @common/config/i18n.php
 
+
+HTML Dropdown
+use yii\helpers\ArrayHelper;
+<?= Html::dropDownList('framework_id', null, ArrayHelper::map(Framework::find()->all(), 'id', 'name'),[
+	'onchange'=>'',
+	'prompt'=>'-Choose a Category-',
+	]) ?>
+
+DB
+	$db = \Yii::$app->getDb();
+	$db->pdo->setAttribute(\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY,true);
+	$cmd = $db->createCommand('
+		SET FOREIGN_KEY_CHECKS=0;
+		TRUNCATE TABLE door;
+		SET FOREIGN_KEY_CHECKS=1;
+	');
+	$cmd->execute();
+
+	DEBUG
+		$model->validate();
+		var_dump($model->getErrors());
+
+	TIMESTAMP
+		use yii\behaviors\TimestampBehavior;
+		use yii\db\Expression;
+		$db = new Expression('NOW()');
+
+	SAVE ARRAY TO DB
+		$model->attributes = $values;
+		$model->save();
+
+PARAMS
+	Yii::$app->params['range-step-uwert']
+
+PJAX
+	[http://blog.neattutorials.com/yii2-pjax-tutorial/]
+	$.pjax.reload('#jebudup', {url: '/test/dupa', type: "POST", data: {dupsko: 'moje'}});

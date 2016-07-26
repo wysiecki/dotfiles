@@ -1,0 +1,10 @@
+AJAX
+
+ $.ajax({
+ 	url: "/manager/get-tree",
+ 	data: { id: id }
+ }).done(function(data) {
+ 	alert(data);
+ 	$('#fancyree_frameTree')
+ });
+

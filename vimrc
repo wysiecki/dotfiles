@@ -21,7 +21,7 @@ set tags=tags,~/.vim/tags
 
 " core plugins
 Bundle "gmarik/vundle"
-Bundle "sjl/gundo.vim"
+" Bundle "sjl/gundo.vim"
 Bundle "vim-airline/vim-airline"
 Bundle 'vim-airline/vim-airline-themes'
 
@@ -70,6 +70,8 @@ Bundle "MattesGroeger/vim-bookmarks"
 " better indentation of html inside php
 Bundle "captbaritone/better-indent-support-for-php-with-html"
 Bundle 'vim-scripts/ZoomWin'
+" leader e prepeared substitution
+Bundle 'wincent/scalpel'
 "
 Bundle "Shougo/neocomplete.vim"
 let g:acp_enableAtStartup = 0
@@ -179,7 +181,7 @@ set synmaxcol=200
 
 " Lower the delay of escaping out of other modes
 " set timeout timeoutlen=1000 ttimeoutlen=1
-set timeout timeoutlen=200 ttimeoutlen=1
+set timeout timeoutlen=1000 ttimeoutlen=1
 """"""""""""""""""""""""""""""""
 "
 " SETTINGS & KEYBINDINGS
@@ -211,10 +213,15 @@ set shell=/bin/bash
 set completeopt -=preview
 "set textwidth=100
 set wildmenu
-set wildignore+=*.bpm,*.gif,*.png,*.jpg,*.ico,.DS_Store,.git,yii-*,assets*
+set wildignore+=*.bpm,*.gif,*.png,*.jpg,*.ico,.DS_Store,.git,yii-*
 " set wildmode=longest,list,full
 set wildmode=longest:full,full
 set mouse=a
+if has("mouse_sgr")
+	set ttymouse=sgr
+else
+	set ttymouse=xterm2
+end
 set ttyfast
 set noshowmode
 set cmdheight=1
@@ -257,6 +264,7 @@ augroup END
 let g:session_directory = "~/.vim/session"
 let g:session_autoload = "no"
 let g:session_autosave = "yes"
+let g:session_autosave_periodic = 2
 let g:session_command_aliases = 1
 let NERDTreeShowBookmarks=1
 let NERDTreeQuitOnOpen=1
@@ -332,7 +340,6 @@ augroup END
 " vim mode-switch lag fix
 if ! has("gui_running")
     set ttimeoutlen=10
-	set term=screen-256color
     augroup FastEscape
         autocmd!
         au InsertEnter * set timeoutlen=0
@@ -351,12 +358,18 @@ if has("mac")
 else
   set clipboard=unnamedplus
 endif
+if has("nvim")
+else
+	" set term=screen-256color
+endif
 
 " make C-a, C-x work properly
 set nrformats=
 
 " potential lag fix
 let g:matchparen_insert_timeout=1
+" set cc=95
+set colorcolumn=95
 
 """"""""""""""""""""""""""""""""
 "
@@ -406,9 +419,6 @@ let g:mta_filetypes = {
     \ 'jinja' : 1,
     \ 'php' : 1,
     \}
-if has("nvim")
-else
-endif
 " let g:toggleTabs = 1
 set showtabline=2
 
@@ -542,7 +552,8 @@ nmap <leader>w :w!<cr>
 nmap <leader>tt :!ctags -R --fields=+aimS --languages=php --totals=yes<CR>
 
 " open cheatsheet
-nmap <leader>h :sp ~/dotfiles/cheatsheet.txt<CR>
+" nmap <leader>h :sp ~/dotfiles/cheatsheet.txt<CR>
+nmap <leader>h :h cheat<CR>
 " open yii2 cheatsheet
 nmap <leader>y :sp ~/dotfiles/yii2.txt<CR>
 " remove hl
@@ -562,5 +573,5 @@ if !exists("g:pdv_cfg_Author")
 	let g:pdv_cfg_Author = "Martin von Wysiecki <wysiecki@gmail.com>"
 endif
 let g:buftabline_show = 2
-nmap <Tab> :bnext<cr>
-nmap <S-Tab> :bprevious<cr>
+" nmap <Tab> :bnext<cr>
+" nmap <S-Tab> :bprevious<cr>

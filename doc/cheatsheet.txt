@@ -1,40 +1,40 @@
+*cheatsheet.txt* Cheatsheet file for vim
 ==============================================================================
 Author:  Martin von Wysiecki <wysiecki@gmail.com>
 ==============================================================================
-Tricks - VIM
-
+Tricks - VIM edited 3
 	KEYSTROKES
 
 	ctrl+]   back ctrl+t  VAR-FILE Definition				BOOKMARKS
-	,0 PASTE Toggle											`m - go to mark m (native)
-	,1 NERDTree												mm - Add/toggle bookmark
-	,2 buffer prev											mi - Add bookamrk annotate
-	,3 buffer right											mn,mp - move next, prev
-	,4 TagList												mc - clear bookmarks in buffer
+	,0 PASTE Toggle								`m - go to mark m (native)
+	,1 NERDTree								mm - Add/toggle bookmark
+	,2 buffer prev								mi - Add bookamrk annotate
+	,3 buffer right								mn,mp - move next, prev
+	,4 TagList								mc - clear bookmarks in buffer
 	,5 UNDO List
 	,6 pdv#DocumentWithSnip()
 	,7 pdv#DocumentCurrentLine()
 	,8 EnableFastPHPFolds
 	,9 EnablePHPFolds
-															SURROUND
-	p @tagbar jumps only									ds' - delete ' surrounding
-	,m ,. jump to last position								cs'"	change surrounding from ' to "
-	,q close buffer											yss'	add surrounding ' (second s for sentense)
-	% jump brackets											ysiw'	add inner word surround
-	* (star) search for word under cursor j
-	j=> n for next											EMMET
+										SURROUND
+	p @tagbar jumps only							ds' - delete ' surrounding
+	,m ,. jump to last position						cs'"	change surrounding from ' to "
+	,q close buffer								yss'	add surrounding ' (second s for sentense)
+	% jump brackets								ysiw'	add inner word surround
+	* (star) search for word under cursor 
+	j=> n for next								EMMET
 	g* same as above but middle of the word					C-y, - expand emmet (table>tr>td*2)
 	P paste after cursor
-	p paste before cursor									GIT
-	ctrl-v block visual selection							:Gstatus - git status
-	zz center of the screen									:Gdiff HEAD - git diff to repository
+	p paste before cursor							GIT
+	ctrl-v block visual selection						:Gstatus - git status
+	zz center of the screen							:Gdiff HEAD - git diff to repository
 	kk insert saves file
 	CTRL i or o  jumps cursor positiions					EASY MOTION
-	ctrl V block visual mode								,,w
+	ctrl V block visual mode						,,w
 	ctrl O single command inside insert mode
-	‘’ return to last cursor position						CTRL-P
+	‘’ return to last cursor position					CTRL-P
 	,tt  regenerete tags file
-                                                            c-return pionowy split
+*dupa*                                                            c-return pionowy split
 	MARKS                                                   c-v pozimy split
 	mm set mark called m                                    c-z multiple selection
 	`m  return to mark m                                    F5 refresh index
