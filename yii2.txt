@@ -22,6 +22,7 @@ $userId = \Yii::$app->user->identity->id
 REQUESTS:
 $request = \Yii::$app->request;
 $name = $request->post('name');
+$get = $request->get();
 
 Grid
 -- edit action column

@@ -149,8 +149,9 @@ filetype plugin indent on
     let g:syntastic_check_on_open=1
     let g:syntastic_aggregate_errors=1
     let g:syntastic_auto_jump=2
-	"let g:syntastic_php_phpcs_args="--standard=PSR2 -n --report=csv"
-	let g:syntastic_php_phpcs_args="--standard=PSR1"
+	let g:syntastic_quiet_messages = { "type": "style"  }
+	"""""""let g:syntastic_php_phpcs_args="--standard=PSR2 -n --report=csv"
+	"let g:syntastic_php_phpcs_args="--standard=PSR1"
 
     " Don"t show specific errors when editing HTML-types.
     let g:syntastic_html_tidy_ignore_errors = [ '<input> proprietary attribute "role"',
@@ -177,7 +178,7 @@ set splitright
 set splitbelow
 
 " Boost performance of rendering long lines
-set synmaxcol=200
+" set synmaxcol=200
 
 " Lower the delay of escaping out of other modes
 " set timeout timeoutlen=1000 ttimeoutlen=1
