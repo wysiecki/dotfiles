@@ -79,6 +79,9 @@ Bundle "MattesGroeger/vim-bookmarks"
 " Bundle "Shougo/unite.vim"
 " Bundle "m2mdas/phpcomplete-extended"
 
+" Bundle "mkusher/padawan.vim"
+
+" omnifunc=padawan#Complete
 " Bundle "Valloric/YouCompleteMe"
 
 " Bundle "edkolev/tmuxline.vim"
@@ -106,7 +109,7 @@ Bundle "MattesGroeger/vim-bookmarks"
 " set omnifunc=phpcomplete#CompletePHP
 " set omnifunc=phpcomplete_extended#CompletePHP
 " autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
-" autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 " let g:deoplete#auto_completion_start_length = 1
 Bundle "jonathanfilip/vim-lucius"
 Bundle "Xuyuanp/nerdtree-git-plugin"
@@ -469,7 +472,8 @@ inoreabbrev teh the
 inoreabbrev flase false
 "
 " PHP COMPLETE
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+" autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 set completeopt=longest,menuone
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " let g:SuperTabDefaultCompletionType = 'context'
