@@ -94,3 +94,17 @@ PARAMS
 PJAX
 	[http://blog.neattutorials.com/yii2-pjax-tutorial/]
 	$.pjax.reload('#jebudup', {url: '/test/dupa', type: "POST", data: {dupsko: 'moje'}});
+
+DROPDOWN (concate date)
+
+    <?= $form->field($model, 'department_id')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(\common\models\Department::find()->orderBy('id')->all(), 'id', 'concate'),
+        'options' => ['placeholder' => Yii::t('app', 'Choose Department')],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
+	Model:
+	public function getConcate(){
+		return $this->company->name.' - '.$this->name;
+	}

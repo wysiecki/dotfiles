@@ -195,7 +195,7 @@ set splitright
 set splitbelow
 
 " Boost performance of rendering long lines
-" set synmaxcol=200
+set synmaxcol=800
 
 " Lower the delay of escaping out of other modes
 " set timeout timeoutlen=1000 ttimeoutlen=1
