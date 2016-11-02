@@ -38,58 +38,75 @@ Bundle "kien/ctrlp.vim"
 " map <C-p> [unite]p
 
 " remember foldig
-Bundle "kopischke/vim-stay"
+" Bundle "kopischke/vim-stay"
 Bundle "scrooloose/syntastic.git"
 Bundle "vim-scripts/tComment"
-Bundle "tpope/vim-surround"
-Bundle "mileszs/ack.vim"
+" Bundle "tpope/vim-surround"
+" Bundle "mileszs/ack.vim"
 Bundle "rking/ag.vim"
-Bundle "edsono/vim-matchit"
+" Bundle "edsono/vim-matchit"
 Bundle "tpope/vim-fugitive"
-Bundle "jiangmiao/auto-pairs"
+" Bundle "jiangmiao/auto-pairs"
 Bundle "xolox/vim-session"
 Bundle "xolox/vim-misc"
 Bundle "airblade/vim-gitgutter"
 Bundle "Lokaltog/vim-easymotion"
 Bundle "rhysd/clever-f.vim"
 Bundle "scrooloose/nerdtree"
-Bundle "vim-scripts/taglist.vim"
+" Bundle "vim-scripts/taglist.vim"
 Bundle "ervandew/supertab"
 Bundle "shawncplus/phpcomplete.vim"
-Bundle "Valloric/MatchTagAlways"
+" Bundle "Valloric/MatchTagAlways"
 Bundle "tobyS/vmustache"
 Bundle "tobyS/pdv"
 Bundle "SirVer/ultisnips"
 Bundle "vim-scripts/phpfolding.vim"
-Bundle "joonty/vdebug"
-Bundle "mattn/emmet-vim"
+" Bundle "joonty/vdebug"
+" Bundle "mattn/emmet-vim"
 Bundle "alvan/vim-php-manual"
 Bundle "altercation/vim-colors-solarized"
 Bundle "MattesGroeger/vim-bookmarks"
 
 " better indentation of html inside php
-Bundle "captbaritone/better-indent-support-for-php-with-html"
-Bundle 'vim-scripts/ZoomWin'
+" Bundle "captbaritone/better-indent-support-for-php-with-html"
+" Bundle 'vim-scripts/ZoomWin'
 " leader e prepeared substitution
-Bundle 'wincent/scalpel'
+" Bundle 'wincent/scalpel'
 "
-Bundle "Shougo/neocomplete.vim"
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 0
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" Bundle "Shougo/neocomplete.vim"
+
+" Bundle "Shougo/vimproc.vim"
+" Bundle "Shougo/unite.vim"
+" Bundle "m2mdas/phpcomplete-extended"
+
+" Bundle "Valloric/YouCompleteMe"
+
+" Bundle "edkolev/tmuxline.vim"
+
+" let g:acp_enableAtStartup = 0
+" " Use neocomplete.
+" let g:neocomplete#enable_at_startup = 1
+" " Use smartcase.
+" let g:neocomplete#enable_smart_case = 1
+" " Set minimum syntax keyword length.
+" let g:neocomplete#sources#syntax#min_keyword_length = 0
+" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" " Define keyword.
+" if !exists('g:neocomplete#keyword_patterns')
+"     let g:neocomplete#keyword_patterns = {}
+" endif
+" let g:neocomplete#keyword_patterns['default'] = '[^. \t]->\h\w*\|\h\w*::'
 
 
 " Bundle "Shougo/deoplete.nvim"
 " autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
 " let g:deoplete#enable_at_startup = 1
 "
-set omnifunc=phpcomplete#CompletePHP
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+" g:phpcomplete_index_composer_command='/usr/local/bin/composer'
+" set omnifunc=phpcomplete#CompletePHP
+" set omnifunc=phpcomplete_extended#CompletePHP
+" autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+" autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 " let g:deoplete#auto_completion_start_length = 1
 Bundle "jonathanfilip/vim-lucius"
 Bundle "Xuyuanp/nerdtree-git-plugin"
@@ -278,6 +295,14 @@ nnoremap gp `[v`]
 
 " ctrlP config
 let g:ctrlp_map = "<c-p>"
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ -g ""'
+
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -442,11 +467,16 @@ set scrolloff=5
 
 inoreabbrev teh the
 inoreabbrev flase false
+"
+" PHP COMPLETE
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+set completeopt=longest,menuone
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " let g:SuperTabDefaultCompletionType = 'context'
-" let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-" let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-" let g:SuperTabContextDiscoverDiscovery = ['&completefunc:<c-n>', '&omnifunc:<c-x><c-o>']
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabContextDiscoverDiscovery = ['&completefunc:<c-n>', '&omnifunc:<c-x><c-o>']
+
 
 " TAGLIST
 let Tlist_Use_Horiz_Window = 0
