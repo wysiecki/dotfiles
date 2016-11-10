@@ -604,8 +604,8 @@ nnoremap <space> za
 nmap <leader>w :w!<cr>
 
 " regenerate tags file
-nmap <leader>tt :!ctags -R --fields=+aimS --languages=php --totals=yes<CR>
-
+" nmap <leader>tt :!ctags -R --fields=+aimS --languages=php --totals=yes<CR>
+nmap <leader>tt :!ctags --recurse --tag-relative --languages=-javascript,sql --exclude='.git' --exclude='*.js' --exclude='tags' --sort=yes --append --PHP-kinds=+cdfi --regex-PHP='/abstract class ([^ ]*)/\1/c/' --regex-PHP='/interface ([^ ]*)/\1/c/' --regex-PHP='/(public |static |abstract |protected |private )+function ([^ (]*)/\2/f/' --fields=+aimS --fields=+l -f tags
 " open cheatsheet
 " nmap <leader>h :sp ~/dotfiles/cheatsheet.txt<CR>
 nmap <leader>h :h cheat<CR>
