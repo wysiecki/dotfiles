@@ -11,13 +11,13 @@ set nocompatible
 set encoding=utf-8
 set shell=/bin/sh
 set encoding=utf-8
-set tags=tags,~/.vim/tags
-	" set tags=./tags
+" set tags=tags,~/.vim/tags
+set tags=./tags
 
-	" start vundler
-	filetype off
-	set rtp+=~/.vim/bundle/vundle/
-	call vundle#rc()
+" start vundler
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
 " core plugins
 Bundle "gmarik/vundle"
@@ -82,7 +82,7 @@ Bundle "MattesGroeger/vim-bookmarks"
 " Bundle "mkusher/padawan.vim"
 
 " omnifunc=padawan#Complete
-" Bundle "Valloric/YouCompleteMe"
+Bundle "Valloric/YouCompleteMe"
 
 " Bundle "edkolev/tmuxline.vim"
 
@@ -258,7 +258,8 @@ set writebackup
 set noswapfile
 set t_Co=256
 set gfn=Source\ Code\ Pro\ for\ Powerline:h14
-:imap § ->
+imap § ->
+imap ß ->
 
 " persist (g)undo tree between sessions
 set undofile
@@ -271,11 +272,11 @@ let mapleader=","
 " show trailing whitespaces
 set list
 set listchars=tab:.\ ,trail:¬,nbsp:.,extends:❯,precedes:❮
-augroup ListChars2
-    au!
-    autocmd filetype go set listchars+=tab:\ \ 
-    autocmd ColorScheme * hi! link SpecialKey Normal
-augroup END
+" augroup ListChars2
+"     au!
+"     autocmd filetype go set listchars+=tab:\ \ 
+"     autocmd ColorScheme * hi! link SpecialKey Normal
+" augroup END
 
 " syntax highlighting
 
@@ -436,9 +437,9 @@ set colorcolumn=95
 " g:UltiSnipsListSnippets <c-tab>
 let g:UltiSnipsSnippetsDir        = '~/.vim/UltiSnips/'
 " Set ultisnips triggers
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 
 let g:mta_filetypes = {
@@ -474,12 +475,30 @@ inoreabbrev flase false
 " PHP COMPLETE
 " autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
 set completeopt=longest,menuone
+" let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:SuperTabContextDiscoverDiscovery = ['&completefunc:<c-n>', '&omnifunc:<c-x><c-o>']
+" let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+" let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+" let g:SuperTabContextDiscoverDiscovery = ['&completefunc:<c-n>', '&omnifunc:<c-x><c-o>']
+"
+"
+
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabContextDefaultCompletionType = "<c-p>"
+" let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+" let g:SuperTabContextDiscoverDiscovery = ["&omnifunc:<c-x><c-o>"]
+" Problem with load order (vimrc is evaluated before latex-box setting of omnifunc)
+" \ verbose set omnifunc? | " is empty
+" added this autocommand to after/ftplugin/tex.vim
+" :do FileType solves also the problem
+" autocmd FileType * 
+"       \ if &omnifunc != '' |
+"       \ call SuperTabChain(&omnifunc, "<c-p>") |
+"       \ call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+"       \ endif
 
 
 " TAGLIST
@@ -578,7 +597,7 @@ nmap <leader>t :tabn<cr>
 nnoremap <leader><leader> <c-^>
 " space open/closes folds
 nnoremap <space> za
-inoremap <S-Tab> <esc>A
+" inoremap <S-Tab> <esc>A
 " :imap kk :w<CR>
 " fast save
 nmap <leader>w :w!<cr>
@@ -610,3 +629,11 @@ endif
 let g:buftabline_show = 2
 " nmap <Tab> :bnext<cr>
 " nmap <S-Tab> :bprevious<cr>
+
+"" <TAB> 
+vnoremap <TAB>   >
+nnoremap <TAB>   >>
+inoremap <C-TAB> <TAB>
+vnoremap <S-TAB> <
+nnoremap <S-TAB> <<
+inoremap <S-TAB> <BackSpace>

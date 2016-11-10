@@ -75,6 +75,10 @@ DB
 	');
 	$cmd->execute();
 
+Relations and other stuff:
+http://www.yiiframework.com/doc-2.0/guide-db-active-record.html#joining-with-relations
+
+
 	DEBUG
 		$model->validate();
 		var_dump($model->getErrors());
@@ -108,3 +112,11 @@ DROPDOWN (concate date)
 	public function getConcate(){
 		return $this->company->name.' - '.$this->name;
 	}
+	ENUM
+			<?php echo $form->field($translateModel, 'language')->dropDownList(
+						common\models\FrameworkTranslations::optslanguage()
+			); ?>
+
+
+Masked input fields
+http://demos.krajee.com/masked-input
