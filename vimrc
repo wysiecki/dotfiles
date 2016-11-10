@@ -12,7 +12,7 @@ set encoding=utf-8
 set shell=/bin/sh
 set encoding=utf-8
 " set tags=tags,~/.vim/tags
-set tags=./tags
+set tags=tags
 
 " start vundler
 filetype off
@@ -26,6 +26,7 @@ Bundle "vim-airline/vim-airline"
 Bundle 'vim-airline/vim-airline-themes'
 
 Bundle "kien/ctrlp.vim"
+Bundle "ivalkeen/vim-ctrlp-tjump"
 
 " Bundle 'Shougo/vimproc.vim', { 'do': 'make' }
 " Bundle 'Shougo/unite.vim'
@@ -637,3 +638,5 @@ inoremap <C-TAB> <TAB>
 vnoremap <S-TAB> <
 nnoremap <S-TAB> <<
 inoremap <S-TAB> <BackSpace>
+
+nnoremap <c-]> :CtrlPtjump<cr>
