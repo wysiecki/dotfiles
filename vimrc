@@ -42,19 +42,19 @@ Bundle "ivalkeen/vim-ctrlp-tjump"
 " Bundle "kopischke/vim-stay"
 Bundle "scrooloose/syntastic.git"
 Bundle "vim-scripts/tComment"
-" Bundle "tpope/vim-surround"
+Bundle "tpope/vim-surround"
 " Bundle "mileszs/ack.vim"
 Bundle "rking/ag.vim"
-" Bundle "edsono/vim-matchit"
+Bundle "edsono/vim-matchit"
 Bundle "tpope/vim-fugitive"
-" Bundle "jiangmiao/auto-pairs"
+Bundle "jiangmiao/auto-pairs"
 Bundle "xolox/vim-session"
 Bundle "xolox/vim-misc"
 Bundle "airblade/vim-gitgutter"
 Bundle "Lokaltog/vim-easymotion"
 Bundle "rhysd/clever-f.vim"
 Bundle "scrooloose/nerdtree"
-" Bundle "vim-scripts/taglist.vim"
+Bundle "vim-scripts/taglist.vim"
 Bundle "ervandew/supertab"
 Bundle "shawncplus/phpcomplete.vim"
 " Bundle "Valloric/MatchTagAlways"
@@ -86,21 +86,6 @@ Bundle "MattesGroeger/vim-bookmarks"
 Bundle "Valloric/YouCompleteMe"
 
 " Bundle "edkolev/tmuxline.vim"
-
-" let g:acp_enableAtStartup = 0
-" " Use neocomplete.
-" let g:neocomplete#enable_at_startup = 1
-" " Use smartcase.
-" let g:neocomplete#enable_smart_case = 1
-" " Set minimum syntax keyword length.
-" let g:neocomplete#sources#syntax#min_keyword_length = 0
-" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-" " Define keyword.
-" if !exists('g:neocomplete#keyword_patterns')
-"     let g:neocomplete#keyword_patterns = {}
-" endif
-" let g:neocomplete#keyword_patterns['default'] = '[^. \t]->\h\w*\|\h\w*::'
-
 
 " Bundle "Shougo/deoplete.nvim"
 " autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
@@ -438,10 +423,28 @@ set colorcolumn=95
 " g:UltiSnipsListSnippets <c-tab>
 let g:UltiSnipsSnippetsDir        = '~/.vim/UltiSnips/'
 " Set ultisnips triggers
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:pdv_template_dir = $HOME ."/dotfiles/phpdoc"
+
+let g:ulti_expand_or_jump_res = 0
+function ExpandSnippetOrCarriageReturn()
+	let snippet = UltiSnips#ExpandSnippetOrJump()
+	if g:ulti_expand_or_jump_res > 0
+		return snippet
+	else
+		return "\<CR>"
+	endif
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+
+
+
+" PHPDoc settings
+" if !exists("g:pdv_cfg_Author")
+let g:pdv_cfg_Author = "Martin von Wysiecki <wysiecki@gmail.com>"
+" endif
 
 let g:mta_filetypes = {
     \ 'html' : 1,
@@ -605,7 +608,7 @@ nmap <leader>w :w!<cr>
 
 " regenerate tags file
 " nmap <leader>tt :!ctags -R --fields=+aimS --languages=php --totals=yes<CR>
-nmap <leader>tt :!ctags --recurse --tag-relative --languages=-javascript,sql --exclude='.git' --exclude='*.js' --exclude='tags' --sort=yes --append --PHP-kinds=+cdfi --regex-PHP='/abstract class ([^ ]*)/\1/c/' --regex-PHP='/interface ([^ ]*)/\1/c/' --regex-PHP='/(public |static |abstract |protected |private )+function ([^ (]*)/\2/f/' --fields=+aimS --fields=+l -f tags
+nmap <leader>tt :!ctags --recurse --tag-relative --languages=-javascript,sql --exclude='.git' --exclude='*.js' --exclude='tags' --sort=yes --append --PHP-kinds=+cdfi --regex-PHP='/abstract class ([^ ]*)/\1/c/' --regex-PHP='/interface ([^ ]*)/\1/c/' --fields=+aimS --fields=+l -f tags<CR>
 " open cheatsheet
 " nmap <leader>h :sp ~/dotfiles/cheatsheet.txt<CR>
 nmap <leader>h :h cheat<CR>
@@ -623,10 +626,6 @@ nnoremap <leader>; :call Semicolonfun()<CR>
 " highlight ajustment
 highligh MatchParen cterm=bold ctermbg=none ctermfg=red
 
-" PHPDoc settings
-if !exists("g:pdv_cfg_Author")
-	let g:pdv_cfg_Author = "Martin von Wysiecki <wysiecki@gmail.com>"
-endif
 let g:buftabline_show = 2
 " nmap <Tab> :bnext<cr>
 " nmap <S-Tab> :bprevious<cr>
