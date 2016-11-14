@@ -68,6 +68,7 @@ Bundle "alvan/vim-php-manual"
 Bundle "altercation/vim-colors-solarized"
 Bundle "MattesGroeger/vim-bookmarks"
 
+
 " better indentation of html inside php
 " Bundle "captbaritone/better-indent-support-for-php-with-html"
 " Bundle 'vim-scripts/ZoomWin'
@@ -84,17 +85,6 @@ Bundle "MattesGroeger/vim-bookmarks"
 " omnifunc=padawan#Complete
 Bundle "Valloric/YouCompleteMe"
 
-" Bundle "edkolev/tmuxline.vim"
-
-" Bundle "Shougo/deoplete.nvim"
-" autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
-" let g:deoplete#enable_at_startup = 1
-"
-" g:phpcomplete_index_composer_command='/usr/local/bin/composer'
-" set omnifunc=phpcomplete#CompletePHP
-" set omnifunc=phpcomplete_extended#CompletePHP
-" autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 " let g:deoplete#auto_completion_start_length = 1
 Bundle "jonathanfilip/vim-lucius"
 Bundle "Xuyuanp/nerdtree-git-plugin"
@@ -166,6 +156,9 @@ filetype plugin indent on
                                                     \"proprietary attribute \"role\"",
                                                     \"proprietary attribute \"hidden\"",
                                                 \]
+" auto command for php files
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
 " PHP {
    let php_htmlInStrings         = 1 " Syntax highlight HTML code inside PHP strings.
    let php_sql_query             = 1 " Syntax highlight SQL code inside PHP strings.
@@ -501,6 +494,9 @@ let Tlist_Display_Prototype = 1 "display full prototype instead of just function
 
 " VEDBUG
 let g:vdebug_options = {"break_on_open" : 0}
+
+
+
 
 " MAPPINGS
 set pastetoggle=<leader>0
