@@ -1,0 +1,72 @@
+
+snippet pf "public function2" b
+	/**
+	* ${1:functionName}
+	*
+	*/
+	public function $1($$2){
+
+
+	}
+endsnippet
+
+snippet trans "insert translation" i
+<?php echo __('${0}');?>
+endsnippet
+
+snippet ytp "Yii2 trans standalone" i
+<?=Yii::t('${1:backend}', '${2}');?>
+endsnippet
+
+snippet ytr "Yii2 trans short" i
+Yii::t('${1:backend}', ${0:${VISUAL:# assertions...}})
+endsnippet
+
+snippet ytre "Yii2 trans short" i
+<?=Yii::t('${1:backend}', ${0:${VISUAL:# assertions...}});?>
+endsnippet
+
+snippet yt "Yii2 trans short" i
+Yii::t('${1:backend}', '${2}')
+endsnippet
+
+snippet dd "var_debug()" i
+var_debug(${0});
+endsnippet
+
+snippet yii2Controller "Yii2 Controller"
+<?php
+
+namespace ${1:namespace}\controllers;
+
+use yii\web\Controller;
+use yii\web\HttpException;
+use yii\helpers\Url;
+use yii\filters\AccessControl;
+use dmstr\bootstrap\Tabs;
+
+/**
+* This is the class for controller "$2Controller".
+* @author: Martin von Wysiecki <wysiecki@gmail.com>
+*/
+class ${2:Name}Controller extends Controller
+{
+
+	/**
+	* Default action
+	* @return mixed
+	*/
+	public function actionIndex()
+	{
+		//$searchModel  = new FrameworkSearch;
+		//$dataProvider = $searchModel->search($_GET);
+
+		Tabs::clearLocalStorage();
+
+		Url::remember();
+		\Yii::$app->session['__crudReturnUrl'] = null;
+
+		return $this->render('index');
+	}
+}
+endsnippet
