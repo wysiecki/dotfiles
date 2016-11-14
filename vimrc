@@ -43,6 +43,7 @@ Bundle "ivalkeen/vim-ctrlp-tjump"
 Bundle "scrooloose/syntastic.git"
 Bundle "vim-scripts/tComment"
 Bundle "tpope/vim-surround"
+Bundle "tpope/vim-repeat"
 " Bundle "mileszs/ack.vim"
 Bundle "rking/ag.vim"
 Bundle "tpope/vim-fugitive"
@@ -70,7 +71,6 @@ Bundle "MattesGroeger/vim-bookmarks"
 " better indentation of html inside php
 " Bundle "captbaritone/better-indent-support-for-php-with-html"
 " Bundle 'vim-scripts/ZoomWin'
-" leader e prepeared substitution
 " Bundle 'wincent/scalpel'
 "
 " Bundle "Shougo/neocomplete.vim"
@@ -138,8 +138,6 @@ let g:solarized_termcolors= 256
 " let g:solarized_visibility = "low"
 let g:DisableAutoPHPFolding = 1
 let g:hardtime_default_on = 1
-" colorscheme lucius
-" set background=light
 " enable all the plugins
 filetype plugin indent on
 
@@ -178,6 +176,11 @@ filetype plugin indent on
    " let php_alt_assignByReference = 1
 " }
 
+""""""""""""""""""""""""""""""""
+"
+" SETTINGS & KEYBINDINGS
+"
+""""""""""""""""""""""""""""""""
 " Always splits to the right and below
 set splitright
 set splitbelow
@@ -186,13 +189,8 @@ set splitbelow
 set synmaxcol=800
 
 " Lower the delay of escaping out of other modes
-" set timeout timeoutlen=1000 ttimeoutlen=1
 set timeout timeoutlen=1000 ttimeoutlen=1
-""""""""""""""""""""""""""""""""
-"
-" SETTINGS & KEYBINDINGS
-"
-""""""""""""""""""""""""""""""""
+
 " set expandtab
 set smarttab
 set shiftwidth=4
@@ -220,7 +218,6 @@ set completeopt -=preview
 "set textwidth=100
 set wildmenu
 set wildignore+=*.bpm,*.gif,*.png,*.jpg,*.ico,.DS_Store,.git,yii-*
-" set wildmode=longest,list,full
 set wildmode=longest:full,full
 set mouse=a
 if has("mouse_sgr")
@@ -257,15 +254,6 @@ let mapleader=","
 " show trailing whitespaces
 set list
 set listchars=tab:.\ ,trail:¬,nbsp:.,extends:❯,precedes:❮
-" augroup ListChars2
-"     au!
-"     autocmd filetype go set listchars+=tab:\ \ 
-"     autocmd ColorScheme * hi! link SpecialKey Normal
-" augroup END
-
-" syntax highlighting
-
-" autocmd FileType * set noexpandtab
 
 " session management
 let g:session_directory = "~/.vim/session"
@@ -361,6 +349,8 @@ if ! has("gui_running")
         au InsertLeave * set timeoutlen=1000
     augroup END
 endif
+"
+"remove margins and stuff on macVim, etc
 if has("gui_running")
 	set go-=r
 	set go-=L
@@ -373,17 +363,13 @@ if has("mac")
 else
   set clipboard=unnamedplus
 endif
-if has("nvim")
-else
-	" set term=screen-256color
-endif
 
 " make C-a, C-x work properly
 set nrformats=
 
 " potential lag fix
 let g:matchparen_insert_timeout=1
-" set cc=95
+" mark right column
 set colorcolumn=95
 
 """"""""""""""""""""""""""""""""
@@ -398,9 +384,6 @@ set colorcolumn=95
 " install ctags, ack, ag
 " sudo packer -S silver-searcher-git ack ctags
 "
-" cd .vim/bundle/tern_for_vim/ && npm install
-" npm install -g jshint
-
 
 " FOLDING
 "set foldenable          " enable folding
@@ -416,9 +399,7 @@ set colorcolumn=95
 " set winminheight=15
 " set winheight=999
 
-" my bindings
 
-" switch between windows
 " g:UltiSnipsListSnippets <c-tab>
 let g:UltiSnipsSnippetsDir        = '~/.vim/UltiSnips/'
 " Set ultisnips triggers
@@ -439,11 +420,6 @@ endfunction
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 
 
-
-" PHPDoc settings
-" if !exists("g:pdv_cfg_Author")
-let g:pdv_cfg_Author = "Martin von Wysiecki <wysiecki@gmail.com>"
-" endif
 
 let g:mta_filetypes = {
     \ 'html' : 1,
@@ -475,9 +451,6 @@ set scrolloff=5
 inoreabbrev teh the
 inoreabbrev flase false
 "
-" PHP COMPLETE
-" autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 set completeopt=longest,menuone
 " let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -523,7 +496,6 @@ let Tlist_Use_Right_Window = 1 "display taglist window on the right
 let Tlist_Display_Prototype = 1 "display full prototype instead of just function name"
 
 " VEDBUG
-" let g:vdebug_options["break_on_open"]=0
 let g:vdebug_options = {"break_on_open" : 0}
 
 " MAPPINGS
