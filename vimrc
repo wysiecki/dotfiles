@@ -82,7 +82,7 @@ Bundle "MattesGroeger/vim-bookmarks"
 " Bundle "mkusher/padawan.vim"
 
 " omnifunc=padawan#Complete
-" Bundle "Valloric/YouCompleteMe"
+Bundle "Valloric/YouCompleteMe"
 
 " Bundle "edkolev/tmuxline.vim"
 
@@ -404,8 +404,8 @@ set colorcolumn=95
 " let g:UltiSnipsSnippetsDir        = '~/.vim/UltiSnips/'
 " switch between windows
 " let g:UltiSnipsListSnippets <c-tab>
-" let g:UltiSnipsSnippetsDir        = '~/dotfiles/snips/'
-let g:UltiSnipsSnippetDirectories=["~/dotfiles/snips"]
+let g:UltiSnipsSnippetsDir        = '~/dotfiles/snips/'
+" let g:UltiSnipsSnippetDirectories=["~/dotfiles/snips"]
 " Set ultisnips triggers
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
