@@ -16,78 +16,83 @@ set tags=tags
 
 " start vundler
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" set rtp+=~/.vim/bundle/Vundle.vim/
+" call vundle#rc()
+
+call plug#begin('~/.vim/plugged')
 
 " core plugins
-Bundle "gmarik/vundle"
-" Bundle "sjl/gundo.vim"
-Bundle "vim-airline/vim-airline"
-Bundle 'vim-airline/vim-airline-themes'
+" Plug "gmarik/vundle"
+" Testers
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'kien/ctrlp.vim'
+"Plug 'ivalkeen/vim-ctrlp-tjump'
+Plug 'kopischke/vim-stay'
+Plug 'vim-syntastic/syntastic'
+Plug 'vim-scripts/tComment'
+"Plug "tpope/vim-surround"
+Plug 'machakann/vim-sandwich'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'tpope/vim-repeat'
+"Plug 'rking/ag.vim'
+"Plug 'tpope/vim-fugitive'
+Plug 'jiangmiao/auto-pairs'
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+Plug 'airblade/vim-gitgutter'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'rhysd/clever-f.vim'
+Plug 'scrooloose/nerdtree'
+"Plug 'vim-scripts/taglist.vim'
+Plug 'ervandew/supertab'
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'Valloric/MatchTagAlways'
+Plug 'tobyS/vmustache'
+Plug 'tobyS/pdv'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'vim-scripts/phpfolding.vim'
+" Plug 'joonty/vdebug'
+Plug 'mattn/emmet-vim'
+Plug 'alvan/vim-php-manual'
+Plug 'altercation/vim-colors-solarized'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'lfilho/cosco.vim'
 
-Bundle "kien/ctrlp.vim"
-Bundle "ivalkeen/vim-ctrlp-tjump"
+"JavaScript
+Plug 'othree/es.next.syntax.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/yajs.vim'
 
-" Bundle 'Shougo/vimproc.vim', { 'do': 'make' }
-" Bundle 'Shougo/unite.vim'
-" Bundle 'rstacruz/vim-fastunite'
+let g:used_javascript_libs = 'jquery'
 "
-" Bundle 'Shougo/neomru.vim'
-" Bundle 'Shougo/unite-outline'
-" Bundle 'tsukkee/unite-tag'
-"
-" map <C-p> [unite]p
-
-" remember foldig
-" Bundle "kopischke/vim-stay"
-Bundle "scrooloose/syntastic.git"
-Bundle "vim-scripts/tComment"
-Bundle "tpope/vim-surround"
-Bundle "tpope/vim-repeat"
-" Bundle "mileszs/ack.vim"
-Bundle "rking/ag.vim"
-Bundle "tpope/vim-fugitive"
-Bundle "jiangmiao/auto-pairs"
-Bundle "xolox/vim-session"
-Bundle "xolox/vim-misc"
-Bundle "airblade/vim-gitgutter"
-Bundle "Lokaltog/vim-easymotion"
-Bundle "rhysd/clever-f.vim"
-Bundle "scrooloose/nerdtree"
-Bundle "vim-scripts/taglist.vim"
-Bundle "ervandew/supertab"
-Bundle "shawncplus/phpcomplete.vim"
-" Bundle "Valloric/MatchTagAlways"
-Bundle "tobyS/vmustache"
-Bundle "tobyS/pdv"
-Bundle "SirVer/ultisnips"
-Bundle "vim-scripts/phpfolding.vim"
-" Bundle "joonty/vdebug"
-" Bundle "mattn/emmet-vim"
-Bundle "alvan/vim-php-manual"
-Bundle "altercation/vim-colors-solarized"
-Bundle "MattesGroeger/vim-bookmarks"
-
 
 " better indentation of html inside php
-" Bundle "captbaritone/better-indent-support-for-php-with-html"
-" Bundle 'vim-scripts/ZoomWin'
-" Bundle 'wincent/scalpel'
+" Plug "captbaritone/better-indent-support-for-php-with-html"
+" Plug 'vim-scripts/ZoomWin'
+" Plug 'wincent/scalpel'
 "
-" Bundle "Shougo/neocomplete.vim"
-
-" Bundle "Shougo/vimproc.vim"
-" Bundle "Shougo/unite.vim"
-" Bundle "m2mdas/phpcomplete-extended"
-
-" Bundle "mkusher/padawan.vim"
+" Plug "Shougo/neocomplete.vim"
+" Plug "sjl/gundo.vim"
+" Plug "mkusher/padawan.vim"
 
 " omnifunc=padawan#Complete
-Bundle "Valloric/YouCompleteMe"
+" Plug "Valloric/YouCompleteMe"
+"
+" make YCM compatible with UltiSnips (using supertab)
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'"
+call plug#end()
+
+
 
 " let g:deoplete#auto_completion_start_length = 1
-Bundle "jonathanfilip/vim-lucius"
-Bundle "Xuyuanp/nerdtree-git-plugin"
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
@@ -158,6 +163,7 @@ filetype plugin indent on
                                                 \]
 " auto command for php files
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+" autocmd FileType php set omnifunc=syntaxcompelete#Complete
 
 " PHP {
    let php_htmlInStrings         = 1 " Syntax highlight HTML code inside PHP strings.
@@ -201,6 +207,7 @@ set relativenumber
 set number
 set ls=2
 set cursorline
+" set nocursorline
 " set nowrap
 set wrap linebreak
 set linebreak
@@ -224,9 +231,9 @@ set cmdheight=1
 " set autoread
 
 " backup/persistance settings
-set undodir=~/.vim/tmp/undo//
-set backupdir=~/.vim/tmp/backup//
-set directory=~/.vim/tmp/swap//
+set undodir=~/.vim/undo//
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
 set backupskip=/tmp/*,/private/tmp/*"
 set backup
 set writebackup
@@ -238,8 +245,8 @@ imap ß ->
 
 " persist (g)undo tree between sessions
 set undofile
-set history=1000
-set undolevels=1000
+set history=8000
+set undolevels=8000
 
 " set <leader>
 let mapleader=","
@@ -265,7 +272,7 @@ nnoremap gp `[v`]
 
 " ctrlP config
 let g:ctrlp_map = "<c-p>"
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+let g:ctrlp_user_command = '/usr/bin/ag %s -i --nocolor --nogroup --hidden
       \ --ignore .git
       \ --ignore .svn
       \ --ignore .hg
@@ -365,57 +372,14 @@ let g:matchparen_insert_timeout=1
 " mark right column
 set colorcolumn=95
 
-""""""""""""""""""""""""""""""""
-"
-" THINGS TODO ON NEW INSTALL
-"
-""""""""""""""""""""""""""""""""
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-"
-" Inside of ~/.vim make /tmp, inside of which mkdir swap backup undo
-"
-" install ctags, ack, ag
-" sudo packer -S silver-searcher-git ack ctags
-"
 
-" FOLDING
-"set foldenable          " enable folding
-"set foldlevelstart=10   " open most folds by default
-"set foldnestmax=10      " 10 nested fold max
-"set foldmethod=syntax   " fold based on indent level
-"set foldexpr=strlen(substitute(getline(v:lnum),'^\\s*[0-9]\.[0-9]*\\s*[0-9]\\(\\s*\\).*$','\\1',\"g\")) 
-"set foldmethod=expr
-
-" Auto resize Vim splits to active split
-" set winwidth=184
-" set winheight=15
-" set winminheight=15
-" set winheight=999
-
-
-" g:UltiSnipsListSnippets <c-tab>
-" let g:UltiSnipsSnippetsDir        = '~/.vim/UltiSnips/'
-" switch between windows
-" let g:UltiSnipsListSnippets <c-tab>
 let g:UltiSnipsSnippetsDir        = '~/dotfiles/snips/'
-" let g:UltiSnipsSnippetDirectories=["~/dotfiles/snips"]
-" Set ultisnips triggers
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:pdv_template_dir = $HOME ."/dotfiles/phpdoc"
 
 let g:ulti_expand_or_jump_res = 0
-function ExpandSnippetOrCarriageReturn()
-	let snippet = UltiSnips#ExpandSnippetOrJump()
-	if g:ulti_expand_or_jump_res > 0
-		return snippet
-	else
-		return "\<CR>"
-	endif
-endfunction
-inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
-
 
 
 let g:mta_filetypes = {
@@ -439,6 +403,7 @@ let g:phpcomplete_mappings = {
    \ 'jump_to_def_split': '<C-W><C-]>',
    \ 'jump_to_def_vsplit': '<C-W><C-\>',
    \}
+
 " in PHP $ is a keyword
 setlocal iskeyword-=\$
 
@@ -451,7 +416,7 @@ inoreabbrev flase false
 
 set completeopt=longest,menuone
 " let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
 " let g:SuperTabDefaultCompletionType = 'context'
 " let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 " let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
@@ -527,8 +492,6 @@ inoremap <C-k> <C-p>
 
 " intellij style autocomplete shortcut
 inoremap <C-Space> <C-x><C-o>
-nnoremap <leader>t :CtrlPMRU<CR>
-nnoremap <leader>bp :CtrlPBuffer<CR>
 
 " easy motion rebinded
 nmap <leader>f <Plug>(easymotion-f2)
@@ -537,7 +500,7 @@ nmap <leader>F <Plug>(easymotion-F2)
 
 "map next-previous jumps
 nnoremap <leader>m <C-o>
-nnoremap <leader>. <C-i>
+nnoremap <leader>. :Buffers<CR>
 " Use :Subvert search
 nnoremap <leader>// :S /
 vnoremap <leader>// :S /
@@ -555,6 +518,11 @@ nnoremap <leader>A :!ag
 nnoremap <leader>a :Ag! 
 nnoremap <leader>hh :call clearmatches()<CR>:noh<CR>
 nnoremap <leader>q :bp<cr>:bd #<cr>
+
+" FZF
+nnoremap <C-a> :Ag<CR>
+nnoremap <C-p> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
 
 " move windows
 nnoremap <silent> <Right> <c-w>l
@@ -578,8 +546,9 @@ nnoremap <space> za
 nmap <leader>w :w!<cr>
 
 " regenerate tags file
+" nmap <leader>tt :!find . -name '*.php' | ctags -L - <CR>
 " nmap <leader>tt :!ctags -R --fields=+aimS --languages=php --totals=yes<CR>
-nmap <leader>tt :!ctags --recurse --tag-relative --languages=-javascript,sql --exclude='.git' --exclude='*.js' --exclude='tags' --sort=yes --append --PHP-kinds=+cdfi --regex-PHP='/abstract class ([^ ]*)/\1/c/' --regex-PHP='/interface ([^ ]*)/\1/c/' --fields=+aimS --fields=+l -f tags<CR>
+" nmap <leader>tt :!ctags --recurse --tag-relative --languages=-javascript,sql,php --exclude=tests --exclude='.git' --exclude='*.js' --exclude='tags' --sort=yes --append --PHP-kinds=+cdfi --regex-PHP='/abstract class ([^ ]*)/\1/c/' --regex-PHP='/interface ([^ ]*)/\1/c/' --fields=+aimS --fields=+l -f tags<CR>
 " open cheatsheet
 " nmap <leader>h :sp ~/dotfiles/cheatsheet.txt<CR>
 nmap <leader>h :h cheat<CR>
@@ -593,7 +562,7 @@ map <silent> <leader><cr> :noh<cr>
 map j gj
 map k gk
 " set a ; at the end of the line
-nnoremap <leader>; :call Semicolonfun()<CR>
+"nnoremap <leader>; :call Semicolonfun()<CR>
 " highlight ajustment
 highligh MatchParen cterm=bold ctermbg=none ctermfg=red
 
@@ -609,7 +578,7 @@ vnoremap <S-TAB> <
 nnoremap <S-TAB> <<
 inoremap <S-TAB> <BackSpace>
 
-nnoremap <c-]> :CtrlPtjump<cr>
+" nnoremap <c-]> :Tags <c-r>=expand("<cword>")<cr><cr>
 
 
 " `<Tab>`/`<S-Tab>` to move between matches without leaving incremental search.
@@ -617,3 +586,10 @@ nnoremap <c-]> :CtrlPtjump<cr>
 " work.
 cnoremap <expr> <C-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
 cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
+"let g:gutentags_define_advanced_commands=1
+vmap <C-x> :w! ~/.vbuf<CR>      "copy the current visual selection to ~/.vbuf
+nmap <C-c> :.w! ~/.vbuf<CR>     "copy the current line to the buffer file if no visual selection
+nmap <C-v> :r ~/.vbuf<CR>       "paste the contents of the buffer file"
+
+autocmd FileType javascript,css,php nmap <silent> <Leader>; <Plug>(cosco-commaOrSemiColon)
+autocmd FileType javascript,css,php imap <silent> <Leader>; <c-o><Plug>(cosco-commaOrSemiColon)

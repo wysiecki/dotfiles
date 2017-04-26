@@ -63,8 +63,11 @@ use yii\helpers\ArrayHelper;
 <?= Html::dropDownList('framework_id', null, ArrayHelper::map(Framework::find()->all(), 'id', 'name'),[
 	'onchange'=>'',
 	'prompt'=>'-Choose a Category-',
+	'class'=>'yourclass',
 	]) ?>
 
+HTML hidden input
+echo Html::hiddenInput('name', $value);
 DB
 	$db = \Yii::$app->getDb();
 	$db->pdo->setAttribute(\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY,true);
@@ -74,6 +77,46 @@ DB
 		SET FOREIGN_KEY_CHECKS=1;
 	');
 	$cmd->execute();
+
+CUSTOM FIELDS TO MODELS
+
+	public $country_id;
+	public function rules() {
+		return ArrayHelper::merge( [ [['country_id'], 'integer']], parent::rules() );
+	}
+
+OR LIKE Search
+	$query->andFilterWhere([
+	    'or',
+		['like', 'profiles.first_name', $this->userFullName],
+		['like', 'profiles.last_name', $this->userFullName],
+	]);
+
+JOIN, SORT over two realated tables
+
+	$query->joinWith(['reviewJournal','reviewJournal.country']);
+	$dataProvider->sort->attributes['country_id'] = [
+		'asc' => ['country.name' => SORT_ASC],
+		'desc' => ['country.name' => SORT_DESC],
+	];
+DEFAULT SORT ORDER
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+			'sort'=> ['defaultOrder' => ['company_name'=>SORT_ASC]]
+		]);
+
+
+ARRAY DATAPROVIDER
+
+		$dataProvider = new ArrayDataProvider([
+			'model' => $data,
+			'sort' => [
+				'attributes' => ['company', 'month', 'year'],
+			],
+			'pagination' => [
+				'pageSize' => 10,
+			],
+		]);
 
 Relations and other stuff:
 http://www.yiiframework.com/doc-2.0/guide-db-active-record.html#joining-with-relations
@@ -99,6 +142,12 @@ PJAX
 	[http://blog.neattutorials.com/yii2-pjax-tutorial/]
 	$.pjax.reload('#jebudup', {url: '/test/dupa', type: "POST", data: {dupsko: 'moje'}});
 
+FORM
+<?= Html::textInput('allSearch', ''); ?>
+
+FORMAT FIELDS:
+	'created:dateTime',
+
 DROPDOWN (concate date)
 
     <?= $form->field($model, 'department_id')->widget(\kartik\widgets\Select2::classname(), [
@@ -117,6 +166,47 @@ DROPDOWN (concate date)
 						common\models\FrameworkTranslations::optslanguage()
 			); ?>
 
+DATE_RANGE_FILTER
+	cols:
+			[
+				'attribute' => 'created',
+				'format'=>'date',
+				'filterType'=> \kartik\grid\GridView::FILTER_DATE_RANGE,
+				'filterWidgetOptions' => [
+					'presetDropdown' => true,
+					'pluginOptions' => [
+						'format' => 'YYYY-MM-DD',
+						'locale' => [
+							'format' => 'DD-MM-YYYY',
+						],
+						'opens'=>'left',
+
+					] ,
+					'pluginEvents' => [
+						"apply.daterangepicker" => "function() { apply_filter('date')  }",
+					]
+				],
+			]
+	model search:
+			if(isset($this->created) && $this->created!=''){
+				$date_explode = explode(" - ", $this->created);
+				$date1 = trim($date_explode[0]);
+				$date2= trim($date_explode[1]);
+				// echo'<br><br><br><br><br><br><br><br><br><br><br><br><br>';
+				// var_dump($this->created);
+				// var_dump($date1);
+				// var_dump($date2);
+				$a = new \DateTime($date1);
+				$b = new \DateTime($date2);
+				// echo $a->getTimestamp();
+				$date1 = date( 'Y-m-d', $a->getTimestamp());
+				$date2 = date( 'Y-m-d', $b->getTimestamp());
+				$query->andFilterWhere(['between', 'created', $date1,$date2]);
+			}
+
 
 Masked input fields
 http://demos.krajee.com/masked-input
+
+RENDER FROM EVERYWHERE
+return \Yii::$app->controller->renderPartial('@common/partial/_benefitContent'.$export['ver'],$export['data']);
