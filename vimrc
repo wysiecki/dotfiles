@@ -68,6 +68,11 @@ Plug 'lfilho/cosco.vim'
 Plug 'othree/es.next.syntax.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/yajs.vim'
+" TypeScript
+" Plug 'Quramy/tsuquyomi'
+Plug 'leafgarland/typescript-vim'
+
+" Plug 'bling/vim-bufferline'
 
 let g:used_javascript_libs = 'jquery'
 "
@@ -123,7 +128,9 @@ let g:airline#extensions#tabline#tab_nr_type   =  1 " tab number
 let g:airline#extensions#tabline#fnamecollapse =  1 " /a/m/model.rb
 let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
 let g:airline#extensions#tabline#fnamemod = ':t'
-set guifont=Sauce\ Code\ Powerline:h13
+" let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+set guifont=Source\ Code\ Powerline:h13
 let g:Powerline_symbols = 'unicode'
 " set fillchars+=stl:\ ,stlnc:\
 let mapleader=','
@@ -593,3 +600,5 @@ nmap <C-v> :r ~/.vbuf<CR>       "paste the contents of the buffer file"
 
 autocmd FileType javascript,css,php nmap <silent> <Leader>; <Plug>(cosco-commaOrSemiColon)
 autocmd FileType javascript,css,php imap <silent> <Leader>; <c-o><Plug>(cosco-commaOrSemiColon)
+
+nnoremap <expr> <leader>m ':b '.nr2char(getchar()).'<CR>'
