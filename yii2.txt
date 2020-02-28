@@ -57,6 +57,13 @@ Grid
 -- gen translation files
 ./yii message/extract @common/config/i18n.php
 
+GRID STYLE
+    [
+        'attribute' => 'id',
+        'headerOptions' => ['style' => 'width:40px'],
+        'format' => 'raw',
+    ],
+
 
 HTML Dropdown
 use yii\helpers\ArrayHelper;
@@ -77,6 +84,13 @@ DB
 		SET FOREIGN_KEY_CHECKS=1;
 	');
 	$cmd->execute();
+JSON
+SELECT id, data2->'$.dupa' browser FROM qms_files WHERE data2->>'$.dupa' > 0
+
+$data = Members::find()
+        ->select(['concat(first_name,last_name) as value', 'first_name as  label','id as id'])
+                ->asArray()
+                        ->all();
 
 CUSTOM FIELDS TO MODELS
 
@@ -105,6 +119,9 @@ DEFAULT SORT ORDER
 			'sort'=> ['defaultOrder' => ['company_name'=>SORT_ASC]]
 		]);
 
+$dataProvider->pagination=false;
+$dataProvider->sort->defaultOrder = ['created_at' => SORT_DESC];
+
 
 ARRAY DATAPROVIDER
 
@@ -125,6 +142,7 @@ http://www.yiiframework.com/doc-2.0/guide-db-active-record.html#joining-with-rel
 	DEBUG
 		$model->validate();
 		var_dump($model->getErrors());
+         \Kint::dump($data);
 
 	TIMESTAMP
 		use yii\behaviors\TimestampBehavior;
@@ -144,9 +162,12 @@ PJAX
 
 FORM
 <?= Html::textInput('allSearch', ''); ?>
+echo Html::textInput('allSearch',null,['id'=>'docSearch']);
 
 FORMAT FIELDS:
 	'created:dateTime',
+
+    echo Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
 
 DROPDOWN (concate date)
 
@@ -210,3 +231,53 @@ http://demos.krajee.com/masked-input
 
 RENDER FROM EVERYWHERE
 return \Yii::$app->controller->renderPartial('@common/partial/_benefitContent'.$export['ver'],$export['data']);
+
+
+DB
+    NOT NULL ->andWhere(['not', ['City' => null]])
+
+    Create migration
+    ./yii migrate/create <name>
+
+SUBQUERY
+
+            $subQuery = UserToDepartment::getUsersForDepartment();
+            $query->andFilterWhere(['not in', 'user.id', $subQuery]);
+
+DEBUG
+    \Kint::dump($data);
+
+KARTIK
+    DATECONTROL
+
+    echo $form->field($model, 'contract_from')->widget(DatePicker::className(), [
+        'options' => [
+            'class' => 'form-control',
+            'dateFormat' => 'php:d-m-Y',
+            'saveFormat' => 'php:U'
+        ],
+    ]);
+
+        $dateControlWidgetOpts = [
+            'type' => DateControl::FORMAT_DATETIME,
+            'saveFormat' => 'php:U',
+            'displayFormat' => 'php:d-m-Y',
+            'widgetOptions' => [
+                'pluginOptions' => [
+                    'minView' => 2,
+                    'autoclose' => true,
+                ]
+            ]
+        ];?>
+        <?= $form->field($model, 'available_from')->widget(DateControl::className(), $dateControlWidgetOpts)->label('Available From*'); ?>
+
+
+JAVASCRIPT in View
+
+use yii\web\View;
+$this->registerJs($js2, View::POS_HEAD); 
+
+JS
+        'onclick' => "$('.wrap').showLoading();",
+        'onclick' => "$('.wrap').hideLoading();",
+

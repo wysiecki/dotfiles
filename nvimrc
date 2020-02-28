@@ -1,6 +1,7 @@
 set ttyfast
 set lazyredraw
 set regexpengine=1
+let loaded_matchparen = 1
 	""""""""""""""""""""""""""""""""
 	"
 	" PACKAGE MANAGEMENT
@@ -13,96 +14,146 @@ set shell=/bin/sh
 set encoding=utf-8
 " set tags=tags,~/.vim/tags
 set tags=tags
+let g:python_host_prog  = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
-" start vundler
 filetype off
-" set rtp+=~/.vim/bundle/Vundle.vim/
-" call vundle#rc()
 
-call plug#begin('~/.vim/plugged')
-
-" core plugins
-" Plug "gmarik/vundle"
-" Testers
+call plug#begin('~/.vim/bundle')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'kien/ctrlp.vim'
-"Plug 'ivalkeen/vim-ctrlp-tjump'
-Plug 'kopischke/vim-stay'
-Plug 'vim-syntastic/syntastic'
-"Plug 'vim-scripts/tComment'
-"Plug "tpope/vim-surround"
-" Plug 'machakann/vim-sandwich'
-" Plug 'ludovicchabant/vim-gutentags'
+
+Plug 'vim-scripts/tComment'
+" Plug 'vim-syntastic/syntastic'
+" let g:syntastic_php_phpcs_args='--standard=PSR2'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-"Plug 'rking/ag.vim'
-"Plug 'tpope/vim-fugitive'
-Plug 'jiangmiao/auto-pairs'
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
 Plug 'airblade/vim-gitgutter'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdtree'
-"Plug 'vim-scripts/taglist.vim'
-Plug 'ervandew/supertab'
-Plug 'shawncplus/phpcomplete.vim'
-Plug 'Valloric/MatchTagAlways'
+Plug 'vim-scripts/taglist.vim'
+" Plug 'Valloric/MatchTagAlways'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'vim-scripts/phpfolding.vim'
 " Plug 'joonty/vdebug'
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 Plug 'alvan/vim-php-manual'
+let g:php_manual_online_search_shortcut = '<leader>p'
+Plug 'Raimondi/delimitMate'
 Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" COLOR
+Plug 'NLKNguyen/papercolor-theme'
+
+" syntax highlight for bunch of languages
+" Plug 'sheerun/vim-polyglot'
+"
+" enhanced php syntax
+
+" special indent line
+" Plug 'Yggdroot/indentLine'
+
+" vim keys guide :WhichKey ','
+" Plug 'liuchengxu/vim-which-key'
+
+" adding , or ; at the end of line
 Plug 'lfilho/cosco.vim'
 
-"JavaScript
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-" Plug 'othree/es.next.syntax.vim'
-" Plug 'othree/javascript-libraries-syntax.vim'
-" Plug 'othree/yajs.vim'
-" TypeScript
-" Plug 'Quramy/tsuquyomi'
-" Plug 'leafgarland/typescript-vim'
-
-" Plug 'terryma/vim-expand-region'
-
-" Plug 'bling/vim-bufferline'
+" rename tabs
+" :TabulousRename <string>
+" Plug 'webdevel/tabulous'
 
 let g:used_javascript_libs = 'jquery'
 "
 
+" match stuff
+" Plug 'andymass/vim-matchup'
 " better indentation of html inside php
-" Plug "captbaritone/better-indent-support-for-php-with-html"
-" Plug 'vim-scripts/ZoomWin'
+" Plug 'captbaritone/better-indent-support-for-php-with-html'
+
+" C-w o zoom in/out
+Plug 'vim-scripts/ZoomWin'
 " Plug 'wincent/scalpel'
 "
-" Plug "Shougo/neocomplete.vim"
-" Plug "sjl/gundo.vim"
-" Plug "mkusher/padawan.vim"
-
-" omnifunc=padawan#Complete
-" Plug "Valloric/YouCompleteMe"
 "
-" make YCM compatible with UltiSnips (using supertab)
-" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-" let g:SuperTabDefaultCompletionType = '<C-n>'"
+" Plug 'beanworks/vim-phpfmt'
+" let g:phpfmt_standard = 'PSR2'
+" let g:phpfmt_command = '/home/wysiecki/.composer/vendor/bin/phpcbf'
+"* Plug 'stephpy/vim-php-cs-fixer'
+"* let g:php_cs_fixer_rules = "@PSR2"
+
+" YAML
+Plug 'tarekbecker/vim-yaml-formatter'
+
+" params change => c2ina
+" Plug 'wellle/targets.vim'
+
+Plug 'christoomey/vim-tmux-navigator'
+
+" autocmd FileType php setlocal omnifunc=ale#Complete
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" git conflicted
+" git config --global alias.conflicted '!vim +Conflicted'
+Plug 'christoomey/vim-conflicted'
+
+" (visual select) :Tab /=
+Plug 'godlygeek/tabular'
+"
+Plug 'StanAngeloff/php.vim'
+
+" GIT
+Plug 'rbong/vim-flog'
+
 call plug#end()
 
+syntax on
+" colorscheme solarized
+set background=light
+colorscheme PaperColor
+" colorscheme solarized8_low
+" colorscheme molokai
+
+" parameter expansion for selected entry via Enter
+" inoremap <silent> <expr> <CR> (pumvisible() ? ncm2_ultisnips#expand_or("\<CR>", 'n') : "\<CR>")
+
+" cycle through completion entries with tab/shift+tab
+inoremap <expr> <TAB> pumvisible() ? "\<c-n>" : "\<TAB>"
+inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<TAB>""
 
 
-" let g:deoplete#auto_completion_start_length = 1
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
@@ -116,74 +167,36 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 
-syntax on
 
-" colorscheme solarized
-colorscheme lucius
-set background=light
-
-let g:airline_theme="marcin"
-let g:airline_powerline_fonts=1
-let g:airline_section_warning = airline#section#create([ "syntastic"  ])
+let g:airline_theme='papercolor'
+" let g:airline_powerline_fonts=1
+let g:airline#extensions#branch#empty_message = 'NO GIT'
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#empty_message  =  "No SCM"
+let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#whitespace#enabled    =  0
 let g:airline#extensions#syntastic#enabled     =  1
 let g:airline#extensions#tabline#enabled       =  1
-let g:airline#extensions#tabline#tab_nr_type   =  1 " tab number
+let g:airline#extensions#tabline#tab_nr_type   =  0 " tab number
 let g:airline#extensions#tabline#fnamecollapse =  1 " /a/m/model.rb
 let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
 let g:airline#extensions#tabline#fnamemod = ':t'
 " let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-set guifont=Source\ Code\ Powerline:h13
-let g:Powerline_symbols = 'unicode'
+let g:airline#extensions#tabline#buffer_nr_show = 0
+" set guifont=Source\ Code\ Powerline:h13
+" let g:Powerline_symbols = 'unicode'
 " set fillchars+=stl:\ ,stlnc:\
-
-" nnoremap <Space> <nop>
-" let mapleader = "\<Space>"
-let mapleader = ","
 set laststatus=2"
 
-let g:solarized_termcolors= 256 
+let g:solarized_termcolors= 256
 " let g:solarized_visibility = "low"
 let g:DisableAutoPHPFolding = 1
 let g:hardtime_default_on = 1
 " enable all the plugins
 filetype plugin indent on
 
-" Syntastic  {
-    let g:syntastic_javascript_checkers = ['jsl']
-    let g:syntastic_enable_signs = 1
-    let g:syntastic_error_symbol = '✗'
-    let g:syntastic_style_error_symbol = '✠'
-    let g:syntastic_warning_symbol = '∆'
-    let g:syntastic_style_warning_symbol = '≈'
-    " Configure syntastic syntax checking to check on open as well as save.
-    let g:syntastic_check_on_open=1
-    let g:syntastic_aggregate_errors=1
-    let g:syntastic_auto_jump=2
-	let g:syntastic_quiet_messages = { "type": "style"  }
-	let g:syntastic_javascript_checkers = ['eslint']
-	"let g:syntastic_javascript_eslint_exe = 'npm run lint --'
-	"""""""let g:syntastic_php_phpcs_args="--standard=PSR2 -n --report=csv"
-	"let g:syntastic_php_phpcs_args="--standard=PSR1"
-
-    " Don"t show specific errors when editing HTML-types.
-    let g:syntastic_html_tidy_ignore_errors = [ '<input> proprietary attribute "role"',
-                                                    \'<i> proprietary attribute "rowid"',
-                                                    \"trimming empty <i>",
-                                                    \'<img> lacks "alt" attribute',
-                                                    \"trimming empty <span>",
-                                                    \"<input> proprietary attribute \"autocomplete\"",
-                                                    \"proprietary attribute \"role\"",
-                                                    \"proprietary attribute \"hidden\"",
-													\"<ion-",
-													\"</ion-",
-													\" proprietary attribute \"ng-"
-                                                \]
-" auto command for php files
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-" autocmd FileType php set omnifunc=syntaxcompelete#Complete
+"
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " PHP {
    let php_htmlInStrings         = 1 " Syntax highlight HTML code inside PHP strings.
@@ -215,6 +228,7 @@ set smarttab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
+set expandtab
 set autoindent
 set ruler
 set hidden
@@ -231,14 +245,15 @@ set cursorline
 " set nowrap
 set wrap linebreak
 set linebreak
-set showbreak=↳\ 
+set showbreak=↳\
 set backspace=indent,eol,start
 set shell=/bin/bash
-set completeopt -=preview
+" set completeopt -=preview
 "set textwidth=100
 set wildmenu
 set wildignore+=*.bpm,*.gif,*.png,*.jpg,*.ico,.DS_Store,.git,yii-*
 set wildmode=longest:full,full
+set mouse=a
 set ttyfast
 set noshowmode
 set cmdheight=1
@@ -254,14 +269,19 @@ set writebackup
 set noswapfile
 set t_Co=256
 set gfn=Source\ Code\ Pro\ for\ Powerline:h14
-imap § ->
-imap ß ->
+" imap ß ->
+set t_ku=OA
+set t_kd=OB
+set t_kr=OC
+set t_kl=OD
 
 " persist (g)undo tree between sessions
 set undofile
 set history=8000
 set undolevels=8000
 
+" set <leader>
+let mapleader=","
 
 " show trailing whitespaces
 set list
@@ -282,13 +302,12 @@ let NERDTreeChDirMode=2
 nnoremap gp `[v`]
 
 
-
-
 " Keep search matches in the middle of the window.
-nnoremap n nzzzv
-nnoremap N Nzzzv
+nnoremap <silent>n nzzzv
+nnoremap <silent>N Nzzzv
+nnoremap <silent>* *zzzv
 
-nnoremap / /\v
+" nnoremap / /\v
 
 
 " clever-f prompt
@@ -330,7 +349,6 @@ endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
 
-highlight search ctermfg=white ctermbg=3423513
 
 """"""""""""""""""""""""""""""""
 "
@@ -353,12 +371,6 @@ if ! has("gui_running")
     augroup END
 endif
 "
-"remove margins and stuff on macVim, etc
-if has("gui_running")
-	set go-=r
-	set go-=L
-	set go-=T
-endif
 
 " macos vs linux tclipboard
 if has("mac")
@@ -377,10 +389,11 @@ set colorcolumn=95
 
 
 let g:UltiSnipsSnippetsDir        = '~/dotfiles/snips/'
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-u>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:pdv_template_dir = $HOME ."/dotfiles/phpdoc"
+let g:pdv_cfg_Author = "MvWysiecki<wysiecki@gmail.com>"
 
 let g:ulti_expand_or_jump_res = 0
 
@@ -396,17 +409,6 @@ let g:mta_filetypes = {
 set showtabline=2
 
 
-nnoremap <leader>; <C-R>=Semicolonfun()<CR>
-fun! Semicolonfun() "{{{
-  call setline(line('.'), substitute(getline('.'), '\s*$', ';', ''))
-  return "\<End>"
-endfunction "}}}
-let g:phpcomplete_mappings = {
-   \ 'jump_to_def': '<C-]>',
-   \ 'jump_to_def_split': '<C-W><C-]>',
-   \ 'jump_to_def_vsplit': '<C-W><C-\>',
-   \}
-
 " in PHP $ is a keyword
 setlocal iskeyword-=\$
 
@@ -417,29 +419,7 @@ inoreabbrev teh the
 inoreabbrev flase false
 "
 
-set completeopt=longest,menuone
-" let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
-" let g:SuperTabDefaultCompletionType = 'context'
-" let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-" let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-" let g:SuperTabContextDiscoverDiscovery = ['&completefunc:<c-n>', '&omnifunc:<c-x><c-o>']
-"
-"
-
-" let g:SuperTabDefaultCompletionType = "context"
-" let g:SuperTabContextDefaultCompletionType = "<c-p>"
-" let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-" let g:SuperTabContextDiscoverDiscovery = ["&omnifunc:<c-x><c-o>"]
-" Problem with load order (vimrc is evaluated before latex-box setting of omnifunc)
-" \ verbose set omnifunc? | " is empty
-" added this autocommand to after/ftplugin/tex.vim
-" :do FileType solves also the problem
-" autocmd FileType * 
-"       \ if &omnifunc != '' |
-"       \ call SuperTabChain(&omnifunc, "<c-p>") |
-"       \ call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-"       \ endif
+" set completeopt=longest,menuone
 
 
 " TAGLIST
@@ -479,8 +459,8 @@ nnoremap <leader>8 <Esc>:EnableFastPHPFolds<Cr>
 nnoremap <leader>9 <Esc>:EnablePHPFolds<Cr>
 " map <F10> <Esc>:DisablePHPFolds<Cr>
 " Sessions
-nnoremap <leader>so :OpenSession 
-nnoremap <leader>ss :SaveSession 
+nnoremap <leader>so :OpenSession
+nnoremap <leader>ss :SaveSession
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
 
@@ -493,16 +473,12 @@ nnoremap <C-k> <C-u>
 inoremap <C-j> <C-n>
 inoremap <C-k> <C-p>
 
-" intellij style autocomplete shortcut
-inoremap <C-Space> <C-x><C-o>
-
 " easy motion rebinded
 nmap <leader>f <Plug>(easymotion-f2)
 nmap <leader>F <Plug>(easymotion-F2)
 "
 
 "map next-previous jumps
-nnoremap <leader>m <C-o>
 nnoremap <leader>. :Buffers<CR>
 " Use :Subvert search
 nnoremap <leader>// :S /
@@ -515,17 +491,46 @@ vnoremap <leader>s :%s /
 " Use :Subvert replace
 nnoremap <leader>S :%S /
 vnoremap <leader>S :%S /
-nnoremap <leader>G mG:Git! 
-nnoremap <leader>g :Git 
-nnoremap <leader>A :!ag 
-nnoremap <leader>a :Ag! 
+nnoremap <leader>G mG:Git!
+nnoremap <leader>g :Git
+" nnoremap <leader>A :!ag
+" nnoremap <leader>a :Ag!
 nnoremap <leader>hh :call clearmatches()<CR>:noh<CR>
 nnoremap <leader>q :bp<cr>:bd #<cr>
 
+
+nnoremap <leader>a :Rg<space>
+" search under cursor
+nnoremap <leader>sw :exec "Rg ".expand("<cword>")<cr>
+
+autocmd VimEnter * command! -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
 " FZF
-nnoremap <C-a> :Ag<CR>
-nnoremap <C-p> :Files<CR>
-nnoremap <C-b> :Buffers<CR>
+"" Fuzzy find files.
+map <C-p> :FZF<CR>
+"" Ctrl + L, list open buffers. I use this alot.
+nnoremap <Plug>(file-history) :History<CR>
+nmap <leader>k <Plug>(file-history)
+
+"" Search word under cursor.
+nnoremap <Plug>(search-cursor-word) :Ag <C-R><C-W><CR>
+nmap <leader>sw <Plug>(search-cursor-word)
+
+" nnoremap <C-a> :Ag<CR>
+" nnoremap <C-p> :Files<CR>
+" nnoremap <C-b> :Buffers<CR>
 
 " move windows
 nnoremap <silent> <Right> <c-w>l
@@ -537,93 +542,144 @@ nnoremap <silent> <C-h> <c-w>h
 nnoremap <silent> <C-k> <c-w>k
 nnoremap <silent> <C-j> <c-w>j
 
+
 " move tabs
 nmap <leader>t :tabn<cr>
 " switch next buffer
 nnoremap <leader><leader> <c-^>
 " space open/closes folds
-nnoremap <S-space> za
+nnoremap <space> za
 " inoremap <S-Tab> <esc>A
 " :imap kk :w<CR>
 " fast save
 nmap <leader>w :w!<cr>
 
-
-" regenerate tags file
-" nmap <leader>tt :!find . -name '*.php' | ctags -L - <CR>
-" nmap <leader>tt :!ctags -R --fields=+aimS --languages=php --totals=yes<CR>
-" nmap <leader>tt :!ctags --recurse --tag-relative --languages=-javascript,sql,php --exclude=tests --exclude='.git' --exclude='*.js' --exclude='tags' --sort=yes --append --PHP-kinds=+cdfi --regex-PHP='/abstract class ([^ ]*)/\1/c/' --regex-PHP='/interface ([^ ]*)/\1/c/' --fields=+aimS --fields=+l -f tags<CR>
 " open cheatsheet
 " nmap <leader>h :sp ~/dotfiles/cheatsheet.txt<CR>
 nmap <leader>h :h cheat<CR>
 " open yii2 cheatsheet
 nmap <leader>y :sp ~/dotfiles/yii2.txt<CR>
+nmap <leader>vv :sp ~/dotfiles/doc/vim.txt<CR>
 " remove hl
 map <silent> <leader><cr> :noh<cr>
-nmap <D-w> <C-w>
+:nmap <D-w> <C-w>
 " saving
 " move on wrapped lines
 map j gj
 map k gk
-" set a ; at the end of the line
-"nnoremap <leader>; :call Semicolonfun()<CR>
-" highlight ajustment
-highligh MatchParen cterm=bold ctermbg=none ctermfg=red
 
 let g:buftabline_show = 2
 " nmap <Tab> :bnext<cr>
 " nmap <S-Tab> :bprevious<cr>
 
-"" <TAB> 
+"" <TAB>
 vnoremap <TAB>   >
 nnoremap <TAB>   >>
-inoremap <C-TAB> <TAB>
+" inoremap <C-TAB> <TAB>
 vnoremap <S-TAB> <
 nnoremap <S-TAB> <<
 inoremap <S-TAB> <BackSpace>
 
-" nnoremap <c-]> :Tags <c-r>=expand("<cword>")<cr><cr>
+" remove highlight on esc
+nnoremap <silent> <esc> :noh<cr>
 
+" Align blocks of text and keep them selected
+vmap < <gv
+vmap > >gv
 
 " `<Tab>`/`<S-Tab>` to move between matches without leaving incremental search.
 " Note dependency on `'wildcharm'` being set to `<C-z>` in order for this to
 " work.
-" cnoremap <expr> <C-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
-" cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
+cnoremap <expr> <C-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
+cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
 "let g:gutentags_define_advanced_commands=1
-vmap <C-x> :w! ~/.vbuf<CR>      "copy the current visual selection to ~/.vbuf
-nmap <C-c> :.w! ~/.vbuf<CR>     "copy the current line to the buffer file if no visual selection
-nmap <C-v> :r ~/.vbuf<CR>       "paste the contents of the buffer file"
+" vmap <C-x> :w! ~/.vbuf<CR>      "copy the current visual selection to ~/.vbuf
+" nmap <C-c> :.w! ~/.vbuf<CR>     "copy the current line to the buffer file if no visual selection
+" nmap <C-v> :r ~/.vbuf<CR>       "paste the contents of the buffer file"
 
 autocmd FileType javascript,css,php nmap <silent> <Leader>; <Plug>(cosco-commaOrSemiColon)
 autocmd FileType javascript,css,php imap <silent> <Leader>; <c-o><Plug>(cosco-commaOrSemiColon)
 
-" switch buffer by leader-m and number
-nnoremap <expr> <leader>m ':b '.nr2char(getchar()).'<CR>'
-" visualize regions
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+inoremap § ->
 
-"Search and replace
-vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
-    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
-omap s :normal vs<CR>
+" Move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <C-J> mz:m+<cr>`z
+nmap <C-K> mz:m-2<cr>`z
+vmap <C-J> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <C-K> :m'<-2<cr>`>my`<mzgv`yo`z
 
-" paste at the end
-vnoremap <silent> y y`]
-vnoremap <silent> p p`]
-nnoremap <silent> p p`]
+map C <Right>
+map C <Right>
+map C <Right>
+map C <Right>
 
-" vp doesn't replace paste buffer
-function! RestoreRegister()
-  let @" = s:restore_reg
-  return ''
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+" Searching with a preview and include gitignored files.
+command! -bang -nargs=* Ag
+      \ call fzf#vim#ag(<q-args>, '--skip-vcs-ignores',
+      \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+      \                         : fzf#vim#with_preview('right:50%'),
+      \                 <bang>0)
+"
+
+" Group the output of :ls by tabs and print it.
+"
+function! LsByTab(bang, args)
+    let ls_output = s:LsOutput(a:bang, a:args)
+
+    " Iterate over all tabs.
+    for tab in gettabinfo()
+        echo '===== tab' tab.tabnr '====='
+        " Get the buffer numbers for the current tab.
+        let buffers = tabpagebuflist(tab.tabnr)
+        " Construct a regular expression that matches the buffer numbers
+        " at the start of the lines of the :ls output.
+        let buffers_pat = '^\s*\(' . join(buffers, '\|') . '\)\>'
+        " Filter the lines from the :ls output so that only the lines for
+        " the buffers of the current tab remain.
+        let tab_buffers = filter(copy(ls_output), 'v:val =~ buffers_pat')
+        " Print the info for the current tab.
+        echo join(tab_buffers, "\n")
+    endfor
 endfunction
-function! s:Repl()
-  let s:restore_reg = @"
-  return "p@=RestoreRegister()\<cr>"
-endfunction
-vmap <silent> <expr> p <sid>Repl()
 
+" bindind for phpactor
+" autocmd FileType php inoremap <Leader>us <Esc>:call phpactor#UseAdd()<CR>
+" autocmd FileType php noremap <Leader>us :call phpactor#UseAdd()<CR>
+" autocmd FileType php inoremap <Leader>qa <Esc>:call phpactor#Hover()<CR>
+" autocmd FileType php noremap <Leader>qa :call phpactor#Hover()<CR>
+" " autocmd FileType php noremap <Leader>] :call phpactor#GotoDefinition()<CR>
+" " autocmd FileType php inoremap <Leader>qa <Esc>:ALEHover<CR>
+" " autocmd FileType php noremap <Leader>qa :ALEHover<CR>
+" autocmd FileType php noremap <Leader>] :ALEGoToDefinition<CR>
+" autocmd FileType php noremap ] :ALEGoToDefinition<CR>
+" " autocmd FileType php noremap ] :ALEGoToDefinition<CR>
 
+command! -bang -nargs=? LsByTab call LsByTab(<q-bang>, <q-args>)
 
+" search highlight
+hi Search ctermbg=LightYellow
+hi Search ctermfg=Red
+
+" highlight ajustment
+highlight MatchParen cterm=bold ctermbg=none ctermfg=red
+hi phpUseNamespaceSeparator guifg=#808080 guibg=NONE gui=NONE
+hi phpClassNamespaceSeparator guifg=#808080 guibg=NONE gui=NONE
+syn match phpParentOnly "[()]" contained containedin=phpParent
+hi phpParentOnly guifg=#f08080 guibg=NONE gui=NONE
+
+" Remap keys for gotos
+nmap <silent> ] <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)

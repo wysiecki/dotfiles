@@ -1,0 +1,5 @@
+" alternative to man
+tldr find
+
+" run last command
+!!
