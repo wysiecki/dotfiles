@@ -54,7 +54,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'vim-scripts/taglist.vim'
+" Plug 'vim-scripts/taglist.vim'
+Plug 'liuchengxu/vista.vim'
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_executive_for = {
+  \ 'php': 'vim_lsp',
+  \ }
+let g:vista#renderer#enable_icon = 0
+let g:vista_fzf_preview = ['right:30%']
 " Plug 'Valloric/MatchTagAlways'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
@@ -451,7 +458,7 @@ set pastetoggle=<leader>0
 nnoremap <leader>1 :NERDTreeToggle<CR>
 nnoremap <leader>2 :bp<CR>
 nnoremap <leader>3 :bn<CR>
-nnoremap <leader>4 :TlistToggle<CR>
+nnoremap <leader>4 :Vista finder<CR>
 nnoremap <leader>5 :GundoToggle<CR>
 nnoremap <leader>6 :call pdv#DocumentWithSnip()<CR>
 nnoremap <leader>7 :call pdv#DocumentCurrentLine()<CR>
@@ -601,6 +608,7 @@ autocmd FileType javascript,css,php nmap <silent> <Leader>; <Plug>(cosco-commaOr
 autocmd FileType javascript,css,php imap <silent> <Leader>; <c-o><Plug>(cosco-commaOrSemiColon)
 
 inoremap § ->
+inoremap ` ->
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <C-J> mz:m+<cr>`z
