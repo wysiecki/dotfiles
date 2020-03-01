@@ -1,6 +1,4 @@
-<Leader>us phpactor#UseAdd
-<Leader>qa phpactor#Hover
-<leader>sw <Plug>(search-cursor-word)
+<leader>A <Plug>(search-cursor-word)
 <leader>. :Buffers
 <c-u> trigger snippet
 <c-r c-w> copy word under cursor to command line

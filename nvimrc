@@ -73,10 +73,10 @@ Plug 'vim-scripts/phpfolding.vim'
 Plug 'alvan/vim-php-manual'
 let g:php_manual_online_search_shortcut = '<leader>p'
 Plug 'Raimondi/delimitMate'
-Plug 'altercation/vim-colors-solarized'
-Plug 'lifepillar/vim-solarized8'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'lifepillar/vim-solarized8'
 Plug 'MattesGroeger/vim-bookmarks'
-Plug 'jonathanfilip/vim-lucius'
+" Plug 'jonathanfilip/vim-lucius'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " COLOR
@@ -275,7 +275,6 @@ set backup
 set writebackup
 set noswapfile
 set t_Co=256
-set gfn=Source\ Code\ Pro\ for\ Powerline:h14
 " imap ß ->
 set t_ku=OA
 set t_kd=OB
@@ -420,6 +419,7 @@ set showtabline=2
 setlocal iskeyword-=\$
 
 set scrolloff=5
+set numberwidth=5
 
 
 inoreabbrev teh the
@@ -428,24 +428,6 @@ inoreabbrev flase false
 
 " set completeopt=longest,menuone
 
-
-" TAGLIST
-let Tlist_Use_Horiz_Window = 0
-let Tlist_Use_Split_Window = 1
-let Tlist_WinHeight = 15
-" com TTToggle NERDTreeToggle | TlistToggle | wincmd l
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_WinWidth = 60
-let Tlist_Close_On_Select = 1 "close taglist window once we selected something
-let Tlist_Exit_OnlyWindow = 1 "if taglist window is the only window left, exit vim
-let Tlist_Show_Menu = 1 "show Tags menu in gvim
-let Tlist_Show_One_File = 1 "show tags of only one file
-let Tlist_GainFocus_On_ToggleOpen = 1 "automatically switch to taglist window
-let Tlist_Highlight_Tag_On_BufEnter = 1 "highlight current tag in taglist window
-let Tlist_Process_File_Always = 1 "even without taglist window, create tags file, required for displaying tag in statusline
-let Tlist_Use_Right_Window = 1 "display taglist window on the right
-let Tlist_Display_Prototype = 1 "display full prototype instead of just function name"
 
 " VEDBUG
 let g:vdebug_options = {"break_on_open" : 0}
@@ -508,7 +490,7 @@ nnoremap <leader>q :bp<cr>:bd #<cr>
 
 nnoremap <leader>a :Rg<space>
 " search under cursor
-nnoremap <leader>sw :exec "Rg ".expand("<cword>")<cr>
+nnoremap <leader>A :Rg<space><c-r><c-w><cr>
 
 autocmd VimEnter * command! -nargs=* Rg
   \ call fzf#vim#grep(
