@@ -9,7 +9,6 @@ let loaded_matchparen = 1
 	""""""""""""""""""""""""""""""""
 	" not a vi
 set nocompatible
-set encoding=utf-8
 set shell=/bin/sh
 set encoding=utf-8
 " set tags=tags,~/.vim/tags
@@ -47,7 +46,7 @@ Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'rking/ag.vim'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
 Plug 'airblade/vim-gitgutter'
@@ -82,6 +81,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " COLOR
 Plug 'NLKNguyen/papercolor-theme'
 
+" ANY JUMP <leader>j
+Plug 'pechorin/any-jump.vim'
+
 " syntax highlight for bunch of languages
 " Plug 'sheerun/vim-polyglot'
 "
@@ -109,7 +111,7 @@ let g:used_javascript_libs = 'jquery'
 " Plug 'captbaritone/better-indent-support-for-php-with-html'
 
 " C-w o zoom in/out
-Plug 'vim-scripts/ZoomWin'
+" Plug 'vim-scripts/ZoomWin'
 " Plug 'wincent/scalpel'
 "
 "
@@ -120,7 +122,7 @@ Plug 'vim-scripts/ZoomWin'
 "* let g:php_cs_fixer_rules = "@PSR2"
 
 " YAML
-Plug 'tarekbecker/vim-yaml-formatter'
+" Plug 'tarekbecker/vim-yaml-formatter'
 
 " params change => c2ina
 " Plug 'wellle/targets.vim'
@@ -134,15 +136,15 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 """"""""""""""""""""""""""""""""""""""""""""""""
 " git conflicted
 " git config --global alias.conflicted '!vim +Conflicted'
-Plug 'christoomey/vim-conflicted'
+" Plug 'christoomey/vim-conflicted'
 
 " (visual select) :Tab /=
 Plug 'godlygeek/tabular'
 "
 Plug 'StanAngeloff/php.vim'
 
-" GIT
-Plug 'rbong/vim-flog'
+" GIT :Flog
+" Plug 'rbong/vim-flog'
 
 call plug#end()
 
@@ -260,7 +262,7 @@ set shell=/bin/bash
 set wildmenu
 set wildignore+=*.bpm,*.gif,*.png,*.jpg,*.ico,.DS_Store,.git,yii-*
 set wildmode=longest:full,full
-set mouse=a
+" set mouse=a
 set ttyfast
 set noshowmode
 set cmdheight=1
@@ -419,7 +421,7 @@ set showtabline=2
 setlocal iskeyword-=\$
 
 set scrolloff=5
-set numberwidth=5
+set numberwidth=7
 
 
 inoreabbrev teh the
@@ -558,16 +560,6 @@ map j gj
 map k gk
 
 let g:buftabline_show = 2
-" nmap <Tab> :bnext<cr>
-" nmap <S-Tab> :bprevious<cr>
-
-"" <TAB>
-vnoremap <TAB>   >
-nnoremap <TAB>   >>
-" inoremap <C-TAB> <TAB>
-vnoremap <S-TAB> <
-nnoremap <S-TAB> <<
-inoremap <S-TAB> <BackSpace>
 
 " remove highlight on esc
 nnoremap <silent> <esc> :noh<cr>
@@ -576,11 +568,10 @@ nnoremap <silent> <esc> :noh<cr>
 vmap < <gv
 vmap > >gv
 
-" `<Tab>`/`<S-Tab>` to move between matches without leaving incremental search.
-" Note dependency on `'wildcharm'` being set to `<C-z>` in order for this to
-" work.
-cnoremap <expr> <C-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
-cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
+" Switch between Tabs
+nmap <S-Tab> :tabprev<cr>
+nmap <Tab> :tabnext<cr>
+
 "let g:gutentags_define_advanced_commands=1
 " vmap <C-x> :w! ~/.vbuf<CR>      "copy the current visual selection to ~/.vbuf
 " nmap <C-c> :.w! ~/.vbuf<CR>     "copy the current line to the buffer file if no visual selection
@@ -598,9 +589,6 @@ nmap <C-K> mz:m-2<cr>`z
 vmap <C-J> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <C-K> :m'<-2<cr>`>my`<mzgv`yo`z
 
-map C <Right>
-map C <Right>
-map C <Right>
 map C <Right>
 
 noremap <Up> <NOP>
@@ -636,19 +624,6 @@ function! LsByTab(bang, args)
         echo join(tab_buffers, "\n")
     endfor
 endfunction
-
-" bindind for phpactor
-" autocmd FileType php inoremap <Leader>us <Esc>:call phpactor#UseAdd()<CR>
-" autocmd FileType php noremap <Leader>us :call phpactor#UseAdd()<CR>
-" autocmd FileType php inoremap <Leader>qa <Esc>:call phpactor#Hover()<CR>
-" autocmd FileType php noremap <Leader>qa :call phpactor#Hover()<CR>
-" " autocmd FileType php noremap <Leader>] :call phpactor#GotoDefinition()<CR>
-" " autocmd FileType php inoremap <Leader>qa <Esc>:ALEHover<CR>
-" " autocmd FileType php noremap <Leader>qa :ALEHover<CR>
-" autocmd FileType php noremap <Leader>] :ALEGoToDefinition<CR>
-" autocmd FileType php noremap ] :ALEGoToDefinition<CR>
-" " autocmd FileType php noremap ] :ALEGoToDefinition<CR>
-
 command! -bang -nargs=? LsByTab call LsByTab(<q-bang>, <q-args>)
 
 " search highlight

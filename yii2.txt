@@ -25,6 +25,8 @@ $name = $request->post('name');
 $get = $request->get();
 
 Grid
+        'enableSorting' => false
+
 -- edit action column
 	'class' => 'yii\grid\ActionColumn',
 	'template'=>'{view} {update} {delete}',
