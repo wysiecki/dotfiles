@@ -283,3 +283,43 @@ JS
         'onclick' => "$('.wrap').showLoading();",
         'onclick' => "$('.wrap').hideLoading();",
 
+
+MODAL
+close button
+&nbsp;<span class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</span>
+
+Modal::begin([
+    'headerOptions' => ['id' => 'modalHeader'],
+    'id' => 'note-modal',
+    'size' => 'modal-lg',
+    'clientOptions' => [
+        'backdrop' => 'static', // nie zamyka
+        'keyboard' => FALSE,
+    ]
+]);
+
+echo "<div id='modalContent'></div>";
+
+yii\bootstrap\Modal::end();
+
+AJAX
+
+    $("#my_form").submit(function(e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        var form = $(this);
+        var url = form.attr('action');
+        $.ajax({
+               type: "POST",
+               url: url,
+               data: form.serialize(), // serializes the form's elements.
+               success: function(data)
+               {
+                    var form_data = {cid : $cid, countryId : $countryId};
+                    loadAjax('/simply-indexing/list', '#pjax-simply-content', form_data);
+                    $('#simplyDocument').modal('hide');
+                    $('.modal-backdrop').remove();
+                    $('#modalContentSimply').html('');
+               }
+             });
+        return false;
+    });

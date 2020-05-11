@@ -54,6 +54,8 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdtree'
 " Plug 'vim-scripts/taglist.vim'
+"
+" function view
 Plug 'liuchengxu/vista.vim'
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_executive_for = {
@@ -72,7 +74,7 @@ Plug 'vim-scripts/phpfolding.vim'
 Plug 'alvan/vim-php-manual'
 let g:php_manual_online_search_shortcut = '<leader>p'
 Plug 'Raimondi/delimitMate'
-" Plug 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 " Plug 'lifepillar/vim-solarized8'
 Plug 'MattesGroeger/vim-bookmarks'
 " Plug 'jonathanfilip/vim-lucius'
@@ -189,6 +191,7 @@ let g:airline#extensions#tabline#enabled       =  1
 let g:airline#extensions#tabline#tab_nr_type   =  0 " tab number
 let g:airline#extensions#tabline#fnamecollapse =  1 " /a/m/model.rb
 let g:airline#extensions#hunks#non_zero_only   =  1 " git gutter
+let g:airline#extensions#coc#enabled ='1'
 let g:airline#extensions#tabline#fnamemod = ':t'
 " let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_nr_show = 0
