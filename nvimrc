@@ -69,20 +69,20 @@ Plug 'tobyS/pdv'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Plug 'vim-scripts/phpfolding.vim'
-Plug 'swekaj/php-foldexpr.vim'
 " Plug 'joonty/vdebug'
 " Plug 'mattn/emmet-vim'
 Plug 'alvan/vim-php-manual'
 let g:php_manual_online_search_shortcut = '<leader>p'
 Plug 'Raimondi/delimitMate'
-Plug 'altercation/vim-colors-solarized'
-" Plug 'lifepillar/vim-solarized8'
 Plug 'MattesGroeger/vim-bookmarks'
 " Plug 'jonathanfilip/vim-lucius'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " COLOR
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'lifepillar/vim-solarized8'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'gruvbox-community/gruvbox'
 
 " ANY JUMP <leader>j
 Plug 'pechorin/any-jump.vim'
@@ -114,7 +114,7 @@ let g:used_javascript_libs = 'jquery'
 " Plug 'captbaritone/better-indent-support-for-php-with-html'
 
 " C-w o zoom in/out
-" Plug 'vim-scripts/ZoomWin'
+Plug 'vim-scripts/ZoomWin'
 " Plug 'wincent/scalpel'
 "
 "
@@ -142,9 +142,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'christoomey/vim-conflicted'
 
 " (visual select) :Tab /=
-Plug 'godlygeek/tabular'
+" Plug 'godlygeek/tabular'
 "
-Plug 'StanAngeloff/php.vim'
+" Plug 'StanAngeloff/php.vim'
 
 " GIT :Flog
 " Plug 'rbong/vim-flog'
@@ -153,8 +153,9 @@ call plug#end()
 
 syntax on
 " colorscheme solarized
-set background=light
-colorscheme PaperColor
+set background=dark
+colorscheme gruvbox
+" colorscheme PaperColor
 " colorscheme solarized8_low
 " colorscheme molokai
 
@@ -162,8 +163,24 @@ colorscheme PaperColor
 " inoremap <silent> <expr> <CR> (pumvisible() ? ncm2_ultisnips#expand_or("\<CR>", 'n') : "\<CR>")
 
 " cycle through completion entries with tab/shift+tab
-inoremap <expr> <TAB> pumvisible() ? "\<c-n>" : "\<TAB>"
-inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<TAB>""
+" inoremap <expr> <TAB> pumvisible() ? "\<c-n>" : "\<TAB>"
+" inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<TAB>""
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+inoremap <silent><expr> <c-space> coc#refresh()
+if exists('*complete_info')
+    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
 
 let g:NERDTreeIndicatorMapCustom = {
@@ -269,16 +286,21 @@ set wildmode=longest:full,full
 " set mouse=a
 set ttyfast
 set noshowmode
-set cmdheight=1
+set shortmess+=c
+set signcolumn=number
 " set autoread
 
 " backup/persistance settings
-set undodir=~/.vim/undo//
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set backupskip=/tmp/*,/private/tmp/*"
-set backup
-set writebackup
+" set undodir=~/.vim/undo//
+" set backupdir=~/.vim/backup//
+" set directory=~/.vim/swap//
+" set backupskip=/tmp/*,/private/tmp/*"
+" set backup
+set nobackup
+set nowritebackup
+set cmdheight=2
+set updatetime=300
+" set writebackup
 set noswapfile
 set t_Co=256
 " imap ß ->
@@ -308,6 +330,8 @@ let g:session_command_aliases = 1
 let NERDTreeShowBookmarks=1
 let NERDTreeQuitOnOpen=1
 let NERDTreeChDirMode=2
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 
 " visual reselect of just pasted
@@ -425,7 +449,7 @@ set showtabline=2
 setlocal iskeyword-=\$
 
 set scrolloff=5
-set numberwidth=7
+set numberwidth=5
 
 
 inoreabbrev teh the
@@ -573,8 +597,10 @@ vmap < <gv
 vmap > >gv
 
 " Switch between Tabs
-nmap <S-Tab> :tabprev<cr>
-nmap <Tab> :tabnext<cr>
+" nmap <S-Tab> :tabprev<cr>
+" nmap <Tab> :tabnext<cr>
+nmap <S-Tab> :bp<cr>
+nmap <Tab> :bn<cr>
 
 "let g:gutentags_define_advanced_commands=1
 " vmap <C-x> :w! ~/.vbuf<CR>      "copy the current visual selection to ~/.vbuf
@@ -643,12 +669,61 @@ hi phpParentOnly guifg=#f08080 guibg=NONE gui=NONE
 
 " Remap keys for gotos
 nmap <silent> ] <Plug>(coc-definition)
+
+" Use ->[g-> and ->]g-> to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+" Use X to show documentation in preview window.
+nnoremap <silent> X :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set expandtab
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" Add ->:Format-> command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
