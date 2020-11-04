@@ -127,8 +127,9 @@ $dataProvider->sort->defaultOrder = ['created_at' => SORT_DESC];
 
 ARRAY DATAPROVIDER
 
+use yii\data\ArrayDataProvider;
 		$dataProvider = new ArrayDataProvider([
-			'model' => $data,
+			'allModels' => $data,
 			'sort' => [
 				'attributes' => ['company', 'month', 'year'],
 			],
@@ -323,3 +324,43 @@ AJAX
              });
         return false;
     });
+
+
+FORM CHECK, save on changes
+
+
+<?php
+$js = <<<JS
+var originalForm = '';
+$(function(){
+    originalForm = $($('#Journal')[0].elements).serialize();
+});
+$('#Journal').on('beforeValidate', function (e) {
+    var newForm = $($('#Journal')[0].elements).serialize();
+    if(originalForm != newForm) {
+        var check = confirm('FORM CHANGES DETECTED. Ready to save?');
+        if (check == true) {
+            return true;
+        } else {
+            $('.wrap').hideLoading();
+            return false;
+        }
+    } else {
+        location.href = '/journal/index';
+        return false;
+    }
+});
+JS;
+
+$this->registerJs($js);
+
+BROWSER LOCAL STORAGE
+    set
+        window.localStorage.setItem('cuurl', hash);
+    get
+        var hash = window.localStorage.getItem('cuurl')
+
+
+SORT ARRAY MULTI BY key name
+
+array_multisort(array_column($array, 'name'), SORT_ASC, $array);

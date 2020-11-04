@@ -49,7 +49,9 @@ Plug 'rking/ag.vim'
 " Plug 'tpope/vim-fugitive'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
-Plug 'airblade/vim-gitgutter'
+
+
+" Plug 'airblade/vim-gitgutter'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdtree'
@@ -73,7 +75,7 @@ Plug 'honza/vim-snippets'
 " Plug 'mattn/emmet-vim'
 Plug 'alvan/vim-php-manual'
 let g:php_manual_online_search_shortcut = '<leader>p'
-Plug 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
 Plug 'MattesGroeger/vim-bookmarks'
 " Plug 'jonathanfilip/vim-lucius'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -104,6 +106,8 @@ Plug 'lfilho/cosco.vim'
 " rename tabs
 " :TabulousRename <string>
 " Plug 'webdevel/tabulous'
+" WINDOWS MANAGER
+Plug 'yaronkh/vim-winmanip'
 
 let g:used_javascript_libs = 'jquery'
 "
@@ -114,7 +118,7 @@ let g:used_javascript_libs = 'jquery'
 " Plug 'captbaritone/better-indent-support-for-php-with-html'
 
 " C-w o zoom in/out
-Plug 'vim-scripts/ZoomWin'
+" Plug 'vim-scripts/ZoomWin'
 " Plug 'wincent/scalpel'
 "
 "
@@ -182,8 +186,7 @@ else
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
-
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -409,11 +412,11 @@ endif
 "
 
 " macos vs linux tclipboard
-if has("mac")
-  set clipboard+=unnamed
-else
-  set clipboard=unnamedplus
-endif
+" if has("mac")
+"   set clipboard+=unnamed
+" else
+"   set clipboard=unnamedplus
+" endif
 
 " make C-a, C-x work properly
 set nrformats=
