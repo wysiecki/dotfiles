@@ -28,33 +28,33 @@ Grid
         'enableSorting' => false
 
 -- edit action column
-	'class' => 'yii\grid\ActionColumn',
-	'template'=>'{view} {update} {delete}',
-	'urlCreator' => function($action, $model, $key, $index) {
+    'class' => 'yii\grid\ActionColumn',
+    'template'=>'{view} {update} {delete}',
+    'urlCreator' => function($action, $model, $key, $index) {
 
 -- add custom dropdown {active non active}
-	add field to rules() in query model in section 'safe'
-		ex.  [['active', ...], 'safe'],
-	add andFilterWhere
-		ex. ->andFilterWhere(['like', 'active', $this->active])
-	'filter'=>array('1'=>'Active','0'=>'Not Active'),
-	add custom format
-		ex. 'format' => 'state',
+    add field to rules() in query model in section 'safe'
+        ex.  [['active', ...], 'safe'],
+    add andFilterWhere
+        ex. ->andFilterWhere(['like', 'active', $this->active])
+    'filter'=>array('1'=>'Active','0'=>'Not Active'),
+    add custom format
+        ex. 'format' => 'state',
 
 -- add custom sorting for custom fileds, add in query model, method search()
-		before $query->load();
-		$dataProvider->sort->attributes['companyId'] = [
-			'asc' => ['company_name' => SORT_ASC],
-			'desc' => ['company_name' => SORT_DESC],
-		];
+        before $query->load();
+        $dataProvider->sort->attributes['companyId'] = [
+            'asc' => ['company_name' => SORT_ASC],
+            'desc' => ['company_name' => SORT_DESC],
+        ];
 -- add custom related text field
-		in query model:
-			add filed name [public $testName]
-			add to rules safe [['testanme'],'safe']
-			add search method:
-				$query->joinWith(['relTable'])
-				$query->andFilterWhere('like', 'table.filed', $this->testName)
-			in gridView attribute 'testName'
+        in query model:
+            add filed name [public $testName]
+            add to rules safe [['testanme'],'safe']
+            add search method:
+                $query->joinWith(['relTable'])
+                $query->andFilterWhere('like', 'table.filed', $this->testName)
+            in gridView attribute 'testName'
 
 -- gen translation files
 ./yii message/extract @common/config/i18n.php
@@ -70,22 +70,22 @@ GRID STYLE
 HTML Dropdown
 use yii\helpers\ArrayHelper;
 <?= Html::dropDownList('framework_id', null, ArrayHelper::map(Framework::find()->all(), 'id', 'name'),[
-	'onchange'=>'',
-	'prompt'=>'-Choose a Category-',
-	'class'=>'yourclass',
-	]) ?>
+    'onchange'=>'',
+    'prompt'=>'-Choose a Category-',
+    'class'=>'yourclass',
+    ]) ?>
 
 HTML hidden input
 echo Html::hiddenInput('name', $value);
 DB
-	$db = \Yii::$app->getDb();
-	$db->pdo->setAttribute(\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY,true);
-	$cmd = $db->createCommand('
-		SET FOREIGN_KEY_CHECKS=0;
-		TRUNCATE TABLE door;
-		SET FOREIGN_KEY_CHECKS=1;
-	');
-	$cmd->execute();
+    $db = \Yii::$app->getDb();
+    $db->pdo->setAttribute(\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY,true);
+    $cmd = $db->createCommand('
+        SET FOREIGN_KEY_CHECKS=0;
+        TRUNCATE TABLE door;
+        SET FOREIGN_KEY_CHECKS=1;
+    ');
+    $cmd->execute();
 JSON
 SELECT id, data2->'$.dupa' browser FROM qms_files WHERE data2->>'$.dupa' > 0
 
@@ -96,30 +96,31 @@ $data = Members::find()
 
 CUSTOM FIELDS TO MODELS
 
-	public $country_id;
-	public function rules() {
-		return ArrayHelper::merge( [ [['country_id'], 'integer']], parent::rules() );
-	}
+    public $country_id;
+    public function rules() {
+        return ArrayHelper::merge( [ [['country_id'], 'integer']], parent::rules() );
+    }
 
 OR LIKE Search
-	$query->andFilterWhere([
-	    'or',
-		['like', 'profiles.first_name', $this->userFullName],
-		['like', 'profiles.last_name', $this->userFullName],
-	]);
+    $query->andFilterWhere([
+        'or',
+        ['like', 'profiles.first_name', $this->userFullName],
+        ['like', 'profiles.last_name', $this->userFullName],
+    ]);
 
 JOIN, SORT over two realated tables
 
-	$query->joinWith(['reviewJournal','reviewJournal.country']);
-	$dataProvider->sort->attributes['country_id'] = [
-		'asc' => ['country.name' => SORT_ASC],
-		'desc' => ['country.name' => SORT_DESC],
-	];
+    $query->joinWith(['reviewJournal','reviewJournal.country']);
+    $dataProvider->sort->attributes['country_id'] = [
+        'asc' => ['country.name' => SORT_ASC],
+        'desc' => ['country.name' => SORT_DESC],
+    ];
+
 DEFAULT SORT ORDER
-		$dataProvider = new ActiveDataProvider([
-			'query' => $query,
-			'sort'=> ['defaultOrder' => ['company_name'=>SORT_ASC]]
-		]);
+    $dataProvider = new ActiveDataProvider([
+        'query' => $query,
+        'sort'=> ['defaultOrder' => ['company_name'=>SORT_ASC]]
+    ]);
 
 $dataProvider->pagination=false;
 $dataProvider->sort->defaultOrder = ['created_at' => SORT_DESC];
@@ -128,47 +129,47 @@ $dataProvider->sort->defaultOrder = ['created_at' => SORT_DESC];
 ARRAY DATAPROVIDER
 
 use yii\data\ArrayDataProvider;
-		$dataProvider = new ArrayDataProvider([
-			'allModels' => $data,
-			'sort' => [
-				'attributes' => ['company', 'month', 'year'],
-			],
-			'pagination' => [
-				'pageSize' => 10,
-			],
-		]);
+    $dataProvider = new ArrayDataProvider([
+        'allModels' => $data,
+        'sort' => [
+            'attributes' => ['company', 'month', 'year'],
+        ],
+        'pagination' => [
+            'pageSize' => 10,
+        ],
+    ]);
 
 Relations and other stuff:
 http://www.yiiframework.com/doc-2.0/guide-db-active-record.html#joining-with-relations
 
 
-	DEBUG
-		$model->validate();
-		var_dump($model->getErrors());
+    DEBUG
+        $model->validate();
+        var_dump($model->getErrors());
          \Kint::dump($data);
 
-	TIMESTAMP
-		use yii\behaviors\TimestampBehavior;
-		use yii\db\Expression;
-		$db = new Expression('NOW()');
+    TIMESTAMP
+        use yii\behaviors\TimestampBehavior;
+        use yii\db\Expression;
+        $db = new Expression('NOW()');
 
-	SAVE ARRAY TO DB
-		$model->attributes = $values;
-		$model->save();
+    SAVE ARRAY TO DB
+        $model->attributes = $values;
+        $model->save();
 
 PARAMS
-	Yii::$app->params['range-step-uwert']
+    Yii::$app->params['range-step-uwert']
 
 PJAX
-	[http://blog.neattutorials.com/yii2-pjax-tutorial/]
-	$.pjax.reload('#jebudup', {url: '/test/dupa', type: "POST", data: {dupsko: 'moje'}});
+    [http://blog.neattutorials.com/yii2-pjax-tutorial/]
+    $.pjax.reload('#jebudup', {url: '/test/dupa', type: "POST", data: {dupsko: 'moje'}});
 
 FORM
 <?= Html::textInput('allSearch', ''); ?>
 echo Html::textInput('allSearch',null,['id'=>'docSearch']);
 
 FORMAT FIELDS:
-	'created:dateTime',
+    'created:dateTime',
 
     echo Yii::$app->formatter->asDate('now', 'yyyy-MM-dd');
 
@@ -181,52 +182,52 @@ DROPDOWN (concate date)
             'allowClear' => true
         ],
     ]); ?>
-	Model:
-	public function getConcate(){
-		return $this->company->name.' - '.$this->name;
-	}
-	ENUM
-			<?php echo $form->field($translateModel, 'language')->dropDownList(
-						common\models\FrameworkTranslations::optslanguage()
-			); ?>
+    Model:
+    public function getConcate(){
+        return $this->company->name.' - '.$this->name;
+    }
+    ENUM
+            <?php echo $form->field($translateModel, 'language')->dropDownList(
+                        common\models\FrameworkTranslations::optslanguage()
+            ); ?>
 
 DATE_RANGE_FILTER
-	cols:
-			[
-				'attribute' => 'created',
-				'format'=>'date',
-				'filterType'=> \kartik\grid\GridView::FILTER_DATE_RANGE,
-				'filterWidgetOptions' => [
-					'presetDropdown' => true,
-					'pluginOptions' => [
-						'format' => 'YYYY-MM-DD',
-						'locale' => [
-							'format' => 'DD-MM-YYYY',
-						],
-						'opens'=>'left',
+    cols:
+            [
+                'attribute' => 'created',
+                'format'=>'date',
+                'filterType'=> \kartik\grid\GridView::FILTER_DATE_RANGE,
+                'filterWidgetOptions' => [
+                    'presetDropdown' => true,
+                    'pluginOptions' => [
+                        'format' => 'YYYY-MM-DD',
+                        'locale' => [
+                            'format' => 'DD-MM-YYYY',
+                        ],
+                        'opens'=>'left',
 
-					] ,
-					'pluginEvents' => [
-						"apply.daterangepicker" => "function() { apply_filter('date')  }",
-					]
-				],
-			]
-	model search:
-			if(isset($this->created) && $this->created!=''){
-				$date_explode = explode(" - ", $this->created);
-				$date1 = trim($date_explode[0]);
-				$date2= trim($date_explode[1]);
-				// echo'<br><br><br><br><br><br><br><br><br><br><br><br><br>';
-				// var_dump($this->created);
-				// var_dump($date1);
-				// var_dump($date2);
-				$a = new \DateTime($date1);
-				$b = new \DateTime($date2);
-				// echo $a->getTimestamp();
-				$date1 = date( 'Y-m-d', $a->getTimestamp());
-				$date2 = date( 'Y-m-d', $b->getTimestamp());
-				$query->andFilterWhere(['between', 'created', $date1,$date2]);
-			}
+                    ] ,
+                    'pluginEvents' => [
+                        "apply.daterangepicker" => "function() { apply_filter('date')  }",
+                    ]
+                ],
+            ]
+    model search:
+            if(isset($this->created) && $this->created!=''){
+                $date_explode = explode(" - ", $this->created);
+                $date1 = trim($date_explode[0]);
+                $date2= trim($date_explode[1]);
+                // echo'<br><br><br><br><br><br><br><br><br><br><br><br><br>';
+                // var_dump($this->created);
+                // var_dump($date1);
+                // var_dump($date2);
+                $a = new \DateTime($date1);
+                $b = new \DateTime($date2);
+                // echo $a->getTimestamp();
+                $date1 = date( 'Y-m-d', $a->getTimestamp());
+                $date2 = date( 'Y-m-d', $b->getTimestamp());
+                $query->andFilterWhere(['between', 'created', $date1,$date2]);
+            }
 
 
 Masked input fields

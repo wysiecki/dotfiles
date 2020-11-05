@@ -294,10 +294,10 @@ set signcolumn=number
 " set autoread
 
 " backup/persistance settings
-" set undodir=~/.vim/undo//
-" set backupdir=~/.vim/backup//
-" set directory=~/.vim/swap//
-" set backupskip=/tmp/*,/private/tmp/*"
+set undodir=~/.vim/undo//
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set backupskip=/tmp/*,/private/tmp/*"
 " set backup
 set nobackup
 set nowritebackup
