@@ -248,6 +248,21 @@ SUBQUERY
             $subQuery = UserToDepartment::getUsersForDepartment();
             $query->andFilterWhere(['not in', 'user.id', $subQuery]);
 
+SUBQUERY in SELECT
+        $query->select([
+            'journal.*',
+            new Expression(
+                "(SELECT IF(ema = 1,CONCAT(name, ' - EMA'),name) FROM mlm_base WHERE id = mlm_to_journal.mlm_id) as mlm_name"
+                ),
+            new Expression(
+                "(SELECT id FROM mlm_base WHERE id = mlm_to_journal.mlm_id) as mlm_id"
+                ),
+            new Expression(
+                "(SELECT ema FROM mlm_base WHERE id = mlm_to_journal.mlm_id) as mlm_ema"
+                )
+            ]
+        );
+
 DEBUG
     \Kint::dump($data);
 
@@ -365,3 +380,18 @@ BROWSER LOCAL STORAGE
 SORT ARRAY MULTI BY key name
 
 array_multisort(array_column($array, 'name'), SORT_ASC, $array);
+
+- na początku
+
+        'filterInputOptions' => [
+            'class' => 'form-control',
+            'prompt' => Yii::$app->params['activeForm.prompt'],
+        ],
+
+
+SAFETY:
+common/components/ReportComponent.php
+
+
+REPORTS MERGE:
+common/models/Report.php:650

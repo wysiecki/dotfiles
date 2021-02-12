@@ -13,32 +13,35 @@ set shell=/bin/sh
 set encoding=utf-8
 " set tags=tags,~/.vim/tags
 set tags=tags
-let g:python_host_prog  = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+" let g:python_host_prog  = '/usr/local/bin/python'
+" let g:python3_host_prog = '/usr/local/bin/python3'
 
 filetype off
 
 call plug#begin('~/.vim/bundle')
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'down': '~40%' }
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'border':  ['fg', 'Ignore'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" iluminate same words
+" Plug 'RRethy/vim-illuminate'
 
 Plug 'vim-scripts/tComment'
 " Plug 'vim-syntastic/syntastic'
@@ -46,12 +49,12 @@ Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'rking/ag.vim'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
 
 
-" Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdtree'
@@ -71,7 +74,6 @@ Plug 'tobyS/pdv'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Plug 'vim-scripts/phpfolding.vim'
-
 " Plug 'joonty/vdebug'
 " Plug 'mattn/emmet-vim'
 Plug 'alvan/vim-php-manual'
@@ -85,7 +87,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'lifepillar/vim-solarized8'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'gruvbox-community/gruvbox'
+" Plug 'gruvbox-community/gruvbox'
 
 " ANY JUMP <leader>j
 Plug 'pechorin/any-jump.vim'
@@ -104,11 +106,15 @@ Plug 'pechorin/any-jump.vim'
 " adding , or ; at the end of line
 Plug 'lfilho/cosco.vim'
 
+" auto close brackets
+Plug 'jiangmiao/auto-pairs'
+
 " rename tabs
 " :TabulousRename <string>
 " Plug 'webdevel/tabulous'
+"
 " WINDOWS MANAGER
-Plug 'yaronkh/vim-winmanip'
+" Plug 'yaronkh/vim-winmanip'
 
 let g:used_javascript_libs = 'jquery'
 "
@@ -158,9 +164,10 @@ call plug#end()
 
 syntax on
 " colorscheme solarized
-set background=dark
-colorscheme gruvbox
-" colorscheme PaperColor
+" set background=dark
+" colorscheme gruvbox
+colorscheme PaperColor
+set background=light
 " colorscheme solarized8_low
 " colorscheme molokai
 
@@ -287,11 +294,10 @@ set shell=/bin/bash
 set wildmenu
 set wildignore+=*.bpm,*.gif,*.png,*.jpg,*.ico,.DS_Store,.git,yii-*
 set wildmode=longest:full,full
-" set mouse=a
+set mouse=a
 set ttyfast
 set noshowmode
 set shortmess+=c
-set signcolumn=number
 " set autoread
 
 " backup/persistance settings
@@ -355,14 +361,15 @@ let g:clever_f_show_prompt = 1
 let g:clever_f_across_no_line = 1
 
 if executable("ag")
-  let g:ackprg = "ag --nogroup --column"
+  " let g:ackprg = "ag --nogroup --column"
+  let g:ackprg = 'rg --vimgrep --type-not sql --smart-case --glob "!{storage/*,web/*,vendor/*,.git/*}"'
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
 " git and ack stuff
-let g:gitgutter_enabled = 1
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
+" let g:gitgutter_enabled = 1
+" let g:gitgutter_realtime = 0
+" let g:gitgutter_eager = 0
 
 
 """"""""""""""""""""""""""""""""
@@ -452,8 +459,8 @@ set showtabline=2
 " in PHP $ is a keyword
 setlocal iskeyword-=\$
 
-set scrolloff=5
-set numberwidth=5
+" set scrolloff=5
+" set numberwidth=10
 
 
 inoreabbrev teh the
@@ -508,14 +515,14 @@ nnoremap <leader>// :S /
 vnoremap <leader>// :S /
 
 " Use regular replace
-nnoremap <leader>s :%s /
-vnoremap <leader>s :%s /
+" nnoremap <leader>s :%s /
+" vnoremap <leader>s :%s /
 
 " Use :Subvert replace
-nnoremap <leader>S :%S /
-vnoremap <leader>S :%S /
-nnoremap <leader>G mG:Git!
-nnoremap <leader>g :Git
+" nnoremap <leader>S :%S /
+" vnoremap <leader>S :%S /
+" nnoremap <leader>G mG:Git!
+" nnoremap <leader>g :Git
 " nnoremap <leader>A :!ag
 " nnoremap <leader>a :Ag!
 nnoremap <leader>hh :call clearmatches()<CR>:noh<CR>
@@ -528,7 +535,7 @@ nnoremap <leader>A :Rg<space><c-r><c-w><cr>
 
 autocmd VimEnter * command! -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!{storage/*,web/*,vendor/*,.git/*}" --color "always" '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -543,17 +550,11 @@ command! -bang -nargs=* Rg
 " FZF
 "" Fuzzy find files.
 map <C-p> :FZF<CR>
+" map <C-p> :GFiles<CR>
 "" Ctrl + L, list open buffers. I use this alot.
 nnoremap <Plug>(file-history) :History<CR>
 nmap <leader>k <Plug>(file-history)
 
-"" Search word under cursor.
-nnoremap <Plug>(search-cursor-word) :Ag <C-R><C-W><CR>
-nmap <leader>sw <Plug>(search-cursor-word)
-
-" nnoremap <C-a> :Ag<CR>
-" nnoremap <C-p> :Files<CR>
-" nnoremap <C-b> :Buffers<CR>
 
 " move windows
 nnoremap <silent> <Right> <c-w>l
@@ -566,16 +567,14 @@ nnoremap <silent> <C-k> <c-w>k
 nnoremap <silent> <C-j> <c-w>j
 
 
-" move tabs
-nmap <leader>t :tabn<cr>
 " switch next buffer
-nnoremap <leader><leader> <c-^>
+" nnoremap <leader><leader> <c-^>
 " space open/closes folds
 nnoremap <space> za
 " inoremap <S-Tab> <esc>A
 " :imap kk :w<CR>
 " fast save
-nmap <leader>w :w!<cr>
+" nmap <leader>w :w!<cr>
 
 " open cheatsheet
 " nmap <leader>h :sp ~/dotfiles/cheatsheet.txt<CR>
@@ -601,21 +600,17 @@ vmap < <gv
 vmap > >gv
 
 " Switch between Tabs
-" nmap <S-Tab> :tabprev<cr>
-" nmap <Tab> :tabnext<cr>
-nmap <S-Tab> :bp<cr>
-nmap <Tab> :bn<cr>
+nmap <S-Tab> :tabprev<cr>
+nmap <Tab> :tabnext<cr>
+nmap <leader>t :tabnew<cr>
+" nmap <S-Tab> :bp<cr>
+" nmap <C-Tab> :bn<cr>
 
-"let g:gutentags_define_advanced_commands=1
-" vmap <C-x> :w! ~/.vbuf<CR>      "copy the current visual selection to ~/.vbuf
-" nmap <C-c> :.w! ~/.vbuf<CR>     "copy the current line to the buffer file if no visual selection
-" nmap <C-v> :r ~/.vbuf<CR>       "paste the contents of the buffer file"
 
 autocmd FileType javascript,css,php nmap <silent> <Leader>; <Plug>(cosco-commaOrSemiColon)
 autocmd FileType javascript,css,php imap <silent> <Leader>; <c-o><Plug>(cosco-commaOrSemiColon)
 
-inoremap § ->
-inoremap ` ->
+inoremap £ ->
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <C-J> mz:m+<cr>`z
@@ -731,3 +726,22 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" command! -bang -nargs=*  All
+"   \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --glob "!{storage/*,web/*,vendor/*,.git/*}"', 'down': '40%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
+
+" toggle relative numbers on insert mode
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+command! Gqf GitGutterQuickFix | copen
+
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+
+" By default vista.vim never run if you don't call it explicitly.
+"
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
