@@ -142,6 +142,9 @@ let g:used_javascript_libs = 'jquery'
 " Plug 'wellle/targets.vim'
 
 Plug 'christoomey/vim-tmux-navigator'
+" share clipboard tmux vim
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'roxma/vim-tmux-clipboard'
 
 " autocmd FileType php setlocal omnifunc=ale#Complete
 
